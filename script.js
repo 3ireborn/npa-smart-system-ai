@@ -453,3 +453,117 @@ console.table(version);
 /* =====================================
    END PART 2
 ===================================== */
+
+/*==================================================
+ NPA SMART SYSTEM AI
+ script.js PART 3
+ Template Engine
+==================================================*/
+
+/* ==========================
+CATEGORY BUTTON
+========================== */
+
+const categoryButtons =
+document.querySelectorAll(".catBtn");
+
+const templateSelect =
+document.getElementById("templateSelect");
+
+let currentCategory = "3ireborn";
+
+/* ==========================
+LOAD TEMPLATE
+========================== */
+
+function loadTemplateList(category){
+
+templateSelect.innerHTML="";
+
+const firstOption=document.createElement("option");
+
+firstOption.value="";
+
+firstOption.textContent="Pilih Template";
+
+templateSelect.appendChild(firstOption);
+
+TEMPLATE_DB[category].forEach((item,index)=>{
+
+const option=document.createElement("option");
+
+option.value=index;
+
+option.textContent=
+
+(index+1)+". "+item.hook;
+
+templateSelect.appendChild(option);
+
+});
+
+}
+
+/* ==========================
+CATEGORY CLICK
+========================== */
+
+categoryButtons.forEach(btn=>{
+
+btn.addEventListener("click",()=>{
+
+categoryButtons.forEach(b=>{
+
+b.classList.remove("active");
+
+});
+
+btn.classList.add("active");
+
+currentCategory=
+
+btn.dataset.category;
+
+loadTemplateList(currentCategory);
+
+});
+
+});
+
+/* ==========================
+SELECT TEMPLATE
+========================== */
+
+templateSelect.addEventListener("change",()=>{
+
+if(templateSelect.value==="") return;
+
+const item=
+
+TEMPLATE_DB[currentCategory][templateSelect.value];
+
+judul.value=item.title;
+
+hook.value=item.hook;
+
+tema.value=item.theme;
+
+warna.value=item.color;
+
+style.value=item.style;
+
+lighting.value=item.lighting;
+
+detail.value=item.detail;
+
+});
+
+/* ==========================
+DEFAULT
+========================== */
+
+window.addEventListener("load",()=>{
+
+loadTemplateList("3ireborn");
+
+});
