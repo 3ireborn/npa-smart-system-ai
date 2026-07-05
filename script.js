@@ -456,19 +456,12 @@ console.table(version);
 
 /*==================================================
  NPA SMART SYSTEM AI
- script.js PART 3
+ script.js PART 4 FINAL
  Template Engine
 ==================================================*/
 
-/* ==========================
-CATEGORY BUTTON
-========================== */
-
-const categoryButtons =
-document.querySelectorAll(".catBtn");
-
-const templateSelect =
-document.getElementById("templateSelect");
+const categoryButtons = document.querySelectorAll(".catBtn");
+const templateSelect = document.getElementById("templateSelect");
 
 let currentCategory = "3ireborn";
 
@@ -484,9 +477,21 @@ const firstOption=document.createElement("option");
 
 firstOption.value="";
 
-firstOption.textContent="Pilih Template";
+firstOption.textContent="Pilih Template...";
 
 templateSelect.appendChild(firstOption);
+
+/* jika kategori tidak ada */
+
+if(!TEMPLATE_DB[category]){
+
+console.warn("Kategori tidak ditemukan :",category);
+
+return;
+
+}
+
+/* isi dropdown */
 
 TEMPLATE_DB[category].forEach((item,index)=>{
 
@@ -494,9 +499,7 @@ const option=document.createElement("option");
 
 option.value=index;
 
-option.textContent=
-
-(index+1)+". "+item.hook;
+option.textContent=(index+1)+". "+item.hook;
 
 templateSelect.appendChild(option);
 
@@ -505,26 +508,62 @@ templateSelect.appendChild(option);
 }
 
 /* ==========================
-CATEGORY CLICK
+CATEGORY BUTTON
 ========================== */
 
 categoryButtons.forEach(btn=>{
 
 btn.addEventListener("click",()=>{
 
-categoryButtons.forEach(b=>{
+categoryButtons.forEach(item=>{
 
-b.classList.remove("active");
+item.classList.remove("active");
 
 });
 
 btn.classList.add("active");
 
-currentCategory=
+const category=btn.dataset.category;
 
-btn.dataset.category;
+/* tombol semua */
 
-loadTemplateList(currentCategory);
+if(category==="all"){
+
+templateSelect.innerHTML="";
+
+const first=document.createElement("option");
+
+first.value="";
+
+first.textContent="Pilih Template...";
+
+templateSelect.appendChild(first);
+
+Object.keys(TEMPLATE_DB).forEach(key=>{
+
+TEMPLATE_DB[key].forEach((item,index)=>{
+
+const option=document.createElement("option");
+
+option.value=key+"-"+index;
+
+option.textContent="["+key.toUpperCase()+"] "+item.hook;
+
+templateSelect.appendChild(option);
+
+});
+
+});
+
+currentCategory="all";
+
+return;
+
+}
+
+currentCategory=category;
+
+loadTemplateList(category);
 
 });
 
@@ -538,9 +577,27 @@ templateSelect.addEventListener("change",()=>{
 
 if(templateSelect.value==="") return;
 
-const item=
+let item;
 
-TEMPLATE_DB[currentCategory][templateSelect.value];
+/* kategori semua */
+
+if(currentCategory==="all"){
+
+const data=templateSelect.value.split("-");
+
+const cat=data[0];
+
+const idx=parseInt(data[1]);
+
+item=TEMPLATE_DB[cat][idx];
+
+}else{
+
+item=TEMPLATE_DB[currentCategory][parseInt(templateSelect.value)];
+
+}
+
+if(!item) return;
 
 judul.value=item.title;
 
@@ -556,14 +613,20 @@ lighting.value=item.lighting;
 
 detail.value=item.detail;
 
+/* otomatis generate */
+
+output.value=buildPrompt();
+
 });
 
 /* ==========================
 DEFAULT
 ========================== */
 
-window.addEventListener("load",()=>{
+window.addEventListener("DOMContentLoaded",()=>{
 
 loadTemplateList("3ireborn");
+
+console.log("✅ Template Engine Ready");
 
 });
