@@ -1,20 +1,13 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>NPA AI Banner Prompt Generator Pro</title>
-
+<title>NPA Smart System | Banner Prompt Generator</title>
 <meta name="theme-color" content="#111827">
-
 <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-
 <link rel="stylesheet" href="style.css">
-
 </head>
-
 <body>
 
 <div class="bg1"></div>
@@ -23,511 +16,185 @@
 <div class="container">
 
 <!-- HEADER -->
-
 <header class="header">
-
 <div class="logoBox">
-
-<div class="logo">
-
-🤖
-
-</div>
-
+<div class="logo">🤖</div>
 <div>
-
-<h1>NPA AI</h1>
-
-<p>Banner Prompt Generator Pro</p>
-
+<h1>NPA SMART SYSTEM</h1>
+<p>AI Banner Prompt Generator Pro</p>
 </div>
-
 </div>
-
 </header>
 
-<!-- CARD -->
-
+<!-- TEMPLATE CATEGORY (SEKARANG DI ATAS) -->
 <section class="card">
-
-<h2>
-
-Generator Prompt Banner AI
-
-</h2>
-
-<p>
-
-Buat Prompt Profesional untuk
-
-ChatGPT • Gemini • Imagen • Nano Banana • Veo3 • Sora
-
-</p>
-
+<h2>Kategori Template</h2>
+<div class="categoryGrid">
+<button class="catBtn active" data-category="all">🌎 Semua</button>
+<button class="catBtn" data-category="3ireborn">💼 3IReborn</button>
+<button class="catBtn" data-category="istikmal">🕌 Istikmal Syariah</button>
+<button class="catBtn" data-category="cruise">🚢 Reward Cruise</button>
+<button class="catBtn" data-category="bali">🌴 Reward Melali Bali</button>
+<button class="catBtn" data-category="umroh">🕋 Umroh Gratis</button>
+</div>
 </section>
 
-<!-- FORM -->
+<!-- QUICK TEMPLATE (SEKARANG DI ATAS) -->
+<section class="card">
+<h2>Quick Template</h2>
+<select id="templateSelect">
+<option value="">Pilih Template...</option>
+</select>
+</section>
 
+<!-- FORM (SEKARANG DI BAWAH TEMPLATE) -->
 <section class="card formCard">
-
 <div class="grid">
 <div class="inputGroup">
-
 <label>Platform Output</label>
-
 <select id="platform">
-
 <option value="facebookFeed">📘 Facebook Feed (4:5)</option>
-
 <option value="facebookReel">🎬 Facebook Reel (9:16)</option>
-
 <option value="youtube">▶ YouTube Thumbnail (16:9)</option>
-
 <option value="instagramFeed">📸 Instagram Feed (1:1)</option>
-
 <option value="instagramStory">📱 Instagram Story (9:16)</option>
-
 <option value="website">🌐 Website Banner (4:3)</option>
-
 <option value="whatsapp">💬 WhatsApp Poster (4:5)</option>
-
 <option value="tiktok">🎵 TikTok Cover (9:16)</option>
-
 </select>
-
 </div>
   
 <div class="inputGroup">
-
-<label>
-
-Judul Banner
-
-</label>
-
-<input
-id="judul"
-type="text"
-placeholder="Contoh : ISTIKMAL SYARIAH">
-
+<label>Judul Banner</label>
+<input id="judul" type="text" placeholder="Contoh : ISTIKMAL SYARIAH">
 </div>
 
 <div class="inputGroup">
-
-<label>
-
-Sub Judul / Hook
-
-</label>
-
-<input
-id="hook"
-type="text"
-placeholder="Contoh : Bisnis Berkah Mengantarkan Sampai Mekah">
-
+<label>Sub Judul / Hook</label>
+<input id="hook" type="text" placeholder="Contoh : Bisnis Berkah Mengantarkan Sampai Mekah">
 </div>
 
 <div class="inputGroup">
-
-<label>
-
-Tema
-
-</label>
-
-<input
-id="tema"
-type="text"
-placeholder="Contoh : Islamic Business">
-
+<label>Tema</label>
+<input id="tema" type="text" placeholder="Contoh : Islamic Business">
 </div>
 
 <div class="inputGroup">
-
-<label>
-
-Warna Dominan
-
-</label>
-
-<input
-id="warna"
-type="text"
-placeholder="Hijau Emerald, Gold, Hitam">
-
+<label>Warna Dominan</label>
+<input id="warna" type="text" placeholder="Hijau Emerald, Gold, Hitam">
 </div>
 
 <div class="inputGroup">
-
-<label>
-
-Style Visual
-
-</label>
-
+<label>Style Visual</label>
 <select id="style">
-
 <option>Modern Cinematic</option>
-
 <option>Gaming Thumbnail</option>
-
 <option>Cyberpunk</option>
-
 <option>Futuristic</option>
-
 <option>Minimalist</option>
-
 <option>Professional Ads</option>
-
 </select>
-
 </div>
 
 <div class="inputGroup">
-
-<label>
-
-Lighting
-
-</label>
-
+<label>Lighting</label>
 <select id="lighting">
-
 <option>Dramatic Lighting</option>
-
 <option>Neon Glow</option>
-
 <option>Studio Lighting</option>
-
 <option>Soft Lighting</option>
-
 <option>Natural Sunlight</option>
-
 </select>
-
 </div>
 
 <div class="inputGroup full">
-
-<label>
-
-Detail Tambahan
-
-</label>
-
-<textarea
-
-id="detail"
-
-rows="6"
-
-placeholder="Tambahkan detail tambahan di sini...">
-
-</textarea>
-
+<label>Detail Tambahan</label>
+<textarea id="detail" rows="6" placeholder="Tambahkan detail tambahan di sini..."></textarea>
 </div>
-
 </div>
 
 <!-- BUTTON -->
-
 <div class="buttonGrid">
-
-<button id="generateBtn">
-
-✨ Generate Prompt
-
-</button>
-
-<button id="randomBtn">
-
-🎲 Random Template
-
-</button>
-
-<button id="copyBtn">
-
-📋 Copy Prompt
-
-</button>
-
-<button id="downloadBtn">
-
-⬇ Download TXT
-
-</button>
-
-<button id="jsonBtn">
-
-💾 Download JSON
-
-</button>
-
-<button id="clearBtn">
-
-🗑 Clear
-
-</button>
-
+<button id="generateBtn">✨ Generate Prompt</button>
+<button id="randomBtn">🎲 Random Template</button>
+<button id="copyBtn">📋 Copy Prompt</button>
+<button id="downloadBtn">⬇ Download TXT</button>
+<button id="jsonBtn">💾 Download JSON</button>
+<button id="clearBtn">🗑 Clear</button>
 </div>
-
 </section>
 
 <!-- OUTPUT -->
-
 <section class="card">
-
 <div class="titleRow">
-
-<h2>
-
-Generated Prompt
-
-</h2>
-
-<span>
-
-AI Ready
-
-</span>
-
+<h2>Generated Prompt</h2>
+<span>AI Ready</span>
 </div>
-
-<textarea
-
-id="output"
-
-readonly
-
-placeholder="Hasil prompt akan muncul di sini...">
-
-</textarea>
-
-</section>
-<!-- TEMPLATE CATEGORY -->
-
-<section class="card">
-
-<h2>Kategori Template</h2>
-
-<div class="categoryGrid">
-
-<button class="catBtn active" data-category="all">
-🌎 Semua
-</button>
-
-<button class="catBtn" data-category="3ireborn">
-💼 3IReborn
-</button>
-
-<button class="catBtn" data-category="istikmal">
-🕌 Istikmal Syariah
-</button>
-
-<button class="catBtn" data-category="cruise">
-🚢 Reward Cruise
-</button>
-
-<button class="catBtn" data-category="bali">
-🌴 Reward Melali Bali
-</button>
-
-<button class="catBtn" data-category="umroh">
-🕋 Umroh Gratis
-</button>
-
-</div>
-
-</section>
-
-<!-- QUICK TEMPLATE -->
-
-<section class="card">
-
-<h2>Quick Template</h2>
-
-<select id="templateSelect">
-
-<option value="">Pilih Template...</option>
-
-</select>
-
+<textarea id="output" readonly placeholder="Hasil prompt akan muncul di sini..."></textarea>
 </section>
 
 <!-- STATUS -->
-
 <section class="card statusCard">
-
 <div class="statusItem">
-
-<div class="statusNumber" id="templateCount">
-
-100
-
+<div class="statusNumber" id="templateCount">100</div>
+<div class="statusLabel">Total Template</div>
 </div>
-
-<div class="statusLabel">
-
-Total Template
-
-</div>
-
-</div>
-
 <div class="statusItem">
-
-<div class="statusNumber">
-
-6
-
+<div class="statusNumber">6</div>
+<div class="statusLabel">Style Visual</div>
 </div>
-
-<div class="statusLabel">
-
-Style Visual
-
-</div>
-
-</div>
-
 <div class="statusItem">
-
-<div class="statusNumber">
-
-5
-
+<div class="statusNumber">5</div>
+<div class="statusLabel">Lighting</div>
 </div>
-
-<div class="statusLabel">
-
-Lighting
-
-</div>
-
-</div>
-
 <div class="statusItem">
-
-<div class="statusNumber">
-
-∞
-
+<div class="statusNumber">∞</div>
+<div class="statusLabel">Variasi Prompt</div>
 </div>
-
-<div class="statusLabel">
-
-Variasi Prompt
-
-</div>
-
-</div>
-
 </section>
 
 <!-- LOADING -->
-
 <div id="loadingBox" class="loadingBox">
-
 <div class="loader"></div>
-
 <h3>AI Sedang Membuat Prompt...</h3>
-
 <p>Mohon tunggu sebentar</p>
-
 </div>
 
 <!-- TOAST -->
-
-<div id="toast">
-
-Prompt berhasil disalin.
-
-</div>
+<div id="toast">Prompt berhasil disalin.</div>
 
 <!-- FLOATING BUTTON -->
-
-<button id="scrollTop">
-
-⬆
-
-</button>
+<button id="scrollTop">⬆</button>
 
 <!-- FOOTER -->
-
 <footer>
-
-<div class="footerLogo">
-
-🤖
-
-</div>
-
-<h2>
-
-NPA Smart System AI
-
-</h2>
-
-<p>
-
-Masterpiece Builder v13.0
-
-</p>
-
-<p>
-
-Professional Visual Prompt Generator
-
-</p>
-
+<div class="footerLogo">🤖</div>
+<h2>NPA Smart System AI</h2>
+<p>Masterpiece Builder v13.0</p>
+<p>Professional Visual Prompt Generator</p>
 <hr>
-
-<p>
-
-Powered by
-
-</p>
-
+<p>Powered by</p>
 <div class="powered">
-
 <span>ChatGPT</span>
-
 <span>Gemini</span>
-
 <span>Imagen</span>
-
 <span>Veo</span>
-
 <span>Sora</span>
-
 <span>Nano Banana</span>
-
 </div>
-
 <hr>
-
-<p>
-
-© 2026
-
-PakD Sugiarto Kurniawan
-
-</p>
-
+<p style="font-weight: 600; color: #f472b6;">Salam penuh cinta 💞 dari NPA Smart System</p>
+<p>© 2026 PakD Sugiarto Kurniawan</p>
 </footer>
 
 </div>
 
-<!-- SCRIPT -->
-
-<script src="templates.js"></script>
-
-<script src="platforms.js"></script>
-  
-  <script src="generator.js"></script> 
-  
-<script src="script.js"></script>
+<!-- SCRIPT (CACHE BUSTER MODE v3) -->
+<script src="templates.js?v=3"></script>
+<script src="platform.js?v=3"></script>
+<script src="generator.js?v=3"></script>
+<script src="script.js?v=3"></script>
 
 </body>
-
 </html>
+
