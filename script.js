@@ -1,7 +1,7 @@
 /*==================================================
  NPA SMART SYSTEM AI
- Masterpiece Builder v13.1
- script.js (With Video Engine & Photo Preview)
+ Masterpiece Builder v13.2
+ script.js (Photo Preview, Dynamic Logic)
 ==================================================*/
 
 const judul = document.getElementById("judul");
@@ -25,9 +25,6 @@ const clearBtn = document.getElementById("clearBtn");
 const loadingBox = document.getElementById("loadingBox");
 const toast = document.getElementById("toast");
 
-/* ============================
-   PHOTO UPLOAD PREVIEW LOGIC
-============================ */
 const uploadArea = document.getElementById("uploadArea");
 const fileInput = document.getElementById("fileInput");
 const previewBox = document.getElementById("previewBox");
@@ -35,10 +32,7 @@ const imagePreview = document.getElementById("imagePreview");
 const resetImgBtn = document.getElementById("resetImgBtn");
 
 if(uploadArea && fileInput) {
-    uploadArea.addEventListener("click", () => {
-        fileInput.click();
-    });
-
+    uploadArea.addEventListener("click", () => { fileInput.click(); });
     fileInput.addEventListener("change", function() {
         if(this.files && this.files[0]) {
             imagePreview.src = URL.createObjectURL(this.files[0]);
@@ -47,7 +41,6 @@ if(uploadArea && fileInput) {
         }
     });
 }
-
 if(resetImgBtn) {
     resetImgBtn.addEventListener("click", () => {
         fileInput.value = "";
@@ -56,9 +49,6 @@ if(resetImgBtn) {
     });
 }
 
-/* ============================
-   ASSEMBLE PROMPT (IMAGE)
-============================ */
 function assemblePrompt() {
     let platformPrefix = "";
     if (typeof PLATFORM_DB !== 'undefined' && PLATFORM_DB[platform.value]) {
@@ -73,9 +63,6 @@ function assemblePrompt() {
     return platformPrefix + mainPrompt;
 }
 
-/* ============================
-   ASSEMBLE PROMPT (VIDEO)
-============================ */
 function assembleVideoPrompt() {
     let platformPrefix = "";
     if (typeof PLATFORM_DB !== 'undefined' && PLATFORM_DB[platform.value]) {
@@ -85,52 +72,35 @@ function assembleVideoPrompt() {
     if (typeof PromptEngine !== 'undefined' && typeof PromptEngine.buildVideo === 'function') {
         videoPrompt = PromptEngine.buildVideo(getFormData());
     } else {
-        videoPrompt = "🚨 ERROR VIDEO: Fungsi Video belum tersedia. Mohon clear cache browser Anda (Gunakan mode Samaran/Incognito).";
+        videoPrompt = "🚨 ERROR VIDEO: Fungsi Video belum tersedia. Mohon clear cache browser Anda.";
     }
     return platformPrefix + videoPrompt;
 }
 
-/* ============================
-   GENERATE EVENT LISTENERS
-============================ */
 generateBtn.addEventListener("click", () => {
     loadingBox.classList.add("show");
     setTimeout(() => {
-        try {
-            output.value = assemblePrompt(); 
-        } catch (error) {
-            output.value = "🚨 ERROR: " + error.message;
-        } finally {
-            loadingBox.classList.remove("show");
-        }
+        try { output.value = assemblePrompt(); } 
+        catch (error) { output.value = "🚨 ERROR: " + error.message; } 
+        finally { loadingBox.classList.remove("show"); }
     }, 1200);
 });
 
 generateVideoBtn.addEventListener("click", () => {
     loadingBox.classList.add("show");
     setTimeout(() => {
-        try {
-            output.value = assembleVideoPrompt(); 
-        } catch (error) {
-            output.value = "🚨 ERROR VIDEO: " + error.message;
-        } finally {
-            loadingBox.classList.remove("show");
-        }
+        try { output.value = assembleVideoPrompt(); } 
+        catch (error) { output.value = "🚨 ERROR VIDEO: " + error.message; } 
+        finally { loadingBox.classList.remove("show"); }
     }, 1500);
 });
 
-/* ============================
-   CLEAR FORM
-============================ */
 clearBtn.addEventListener("click", () => {
     judul.value = ""; hook.value = ""; tema.value = ""; warna.value = ""; detail.value = "";
     style.selectedIndex = 0; lighting.selectedIndex = 0; output.value = "";
-    if(resetImgBtn) resetImgBtn.click(); // Reset foto juga
+    if(resetImgBtn) resetImgBtn.click();
 });
 
-/* ============================
-   AUTO SAVE & LOAD
-============================ */
 const fields = [judul, hook, tema, warna, style, lighting, detail, platform];
 function getFormData(){
     return {
@@ -159,9 +129,6 @@ window.addEventListener("load", () => {
     if(data.platform) platform.value = data.platform;
 });
 
-/* =====================================
-   TOAST & COPY & DOWNLOAD
-===================================== */
 function showToast(message = "Berhasil!") {
     toast.innerHTML = message;
     toast.classList.add("show");
@@ -173,12 +140,10 @@ copyBtn.addEventListener("click", () => {
     navigator.clipboard.writeText(output.value);
     showToast("Prompt berhasil disalin.");
 });
-
 output.addEventListener("dblclick", () => {
     navigator.clipboard.writeText(output.value);
     showToast("Prompt berhasil disalin.");
 });
-
 downloadBtn.addEventListener("click", () => {
     if (output.value.trim() === "") return showToast("Belum ada Prompt.");
     let fileName = judul.value.trim() || "NPA_Prompt";
@@ -191,7 +156,6 @@ downloadBtn.addEventListener("click", () => {
     URL.revokeObjectURL(link.href);
     showToast("TXT berhasil diunduh.");
 });
-
 jsonBtn.addEventListener("click", () => {
     const data = { judul: judul.value, hook: hook.value, tema: tema.value, warna: warna.value, style: style.value, lighting: lighting.value, detail: detail.value, prompt: output.value };
     let fileName = judul.value.trim() || "NPA_JSON";
@@ -205,12 +169,9 @@ jsonBtn.addEventListener("click", () => {
     showToast("JSON berhasil diunduh.");
 });
 
-/*==================================================
- TEMPLATE ENGINE
-==================================================*/
 const categoryButtons = document.querySelectorAll(".catBtn");
 const templateSelect = document.getElementById("templateSelect");
-let currentCategory = "3ireborn";
+let currentCategory = "all"; // Default ke Semua
 
 function loadTemplateList(category) {
     templateSelect.innerHTML = "";
@@ -269,9 +230,12 @@ templateSelect.addEventListener("change", () => {
     if (!item) return;
     judul.value = item.title || ""; hook.value = item.hook || ""; tema.value = item.theme || "";
     warna.value = item.color || ""; style.value = item.style || ""; lighting.value = item.lighting || ""; detail.value = item.detail || "";
+    
+    // Generate Otomatis Gambar
     output.value = assemblePrompt(); 
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    loadTemplateList("3ireborn");
+    // Memuat default "Semua" saat pertama buka
+    document.querySelector('.catBtn[data-category="all"]').click();
 });
