@@ -1,13 +1,12 @@
 /*==================================================
  NPA SMART SYSTEM AI
  Masterpiece Builder v13.0
- script.js PART 1
+ script.js (FINAL & SAFE INTEGRATION)
 ==================================================*/
 
 /* ============================
    DOM ELEMENT
 ============================ */
-
 const judul = document.getElementById("judul");
 const hook = document.getElementById("hook");
 const tema = document.getElementById("tema");
@@ -29,441 +28,237 @@ const loadingBox = document.getElementById("loadingBox");
 const toast = document.getElementById("toast");
 
 /* ============================
-   PROMPT ENGINE
+   PROMPT ENGINE (INTEGRATION)
+   Menjaga fungsi Platform karya tetangga
+   dan menggabungkannya dengan generator.js
 ============================ */
+function assemblePrompt() {
+    // 1. Ambil prefix Platform (Jerih payah tetangga tetap aman!)
+    let platformPrefix = "";
+    if (typeof PLATFORM_DB !== 'undefined' && PLATFORM_DB[platform.value]) {
+        platformPrefix = PLATFORM_DB[platform.value].prefix + "\n";
+    }
 
-function buildPrompt(){
-const selectedPlatform = PLATFORM_DB[platform.value];
+    // 2. Ambil data dari form dan rakit menggunakan mesin generator.js
+    let mainPrompt = "";
+    if (typeof PromptEngine !== 'undefined') {
+        const data = getFormData(); // Fungsi dari generator.js
+        mainPrompt = PromptEngine.build(data); // Fungsi dari generator.js
+    } else {
+        mainPrompt = "Error: generator.js belum dimuat atau tidak ditemukan.";
+    }
 
-const platformPrefix = selectedPlatform
-    ? selectedPlatform.prefix
-    : "";
-const prompt = `
-${platformPrefix}
-
-THUMBNAIL CONTEXT
-
-Video Title :
-${judul.value}
-
-Supporting Hook :
-${hook.value}
-
-Theme :
-${tema.value}
-
-Aspect Ratio :
-9:16
-
-STYLE DIRECTION
-
-${style.value}
-
-LIGHTING
-
-${lighting.value}
-
-COLOR GRADING
-
-${warna.value}
-
-VISUAL REQUIREMENTS
-
-• Ultra detailed
-
-• Professional composition
-
-• Sharp focus
-
-• High contrast
-
-• Clean layout
-
-• Cinematic atmosphere
-
-• Premium advertising quality
-
-• Eye-catching design
-
-• Suitable for social media
-
-• Suitable for website banner
-
-ADDITIONAL DETAILS
-
-${detail.value}
-
-FINAL OUTPUT
-
-Professional AI-generated banner artwork with premium visual quality, cinematic composition, photorealistic, 8K, HDR, highly detailed.
-
-`;
-
-return prompt;
-
+    // 3. Gabungkan Platform Prefix dengan Prompt Utama
+    return platformPrefix + mainPrompt;
 }
 
 /* ============================
    GENERATE
 ============================ */
-
-generateBtn.addEventListener("click",()=>{
-
-loadingBox.classList.add("show");
-
-setTimeout(()=>{
-
-output.value = buildPrompt();
-
-loadingBox.classList.remove("show");
-
-},1200);
-
+generateBtn.addEventListener("click", () => {
+    loadingBox.classList.add("show");
+    setTimeout(() => {
+        // Menggunakan mesin gabungan yang baru
+        output.value = assemblePrompt(); 
+        loadingBox.classList.remove("show");
+    }, 1200);
 });
 
 /* ============================
    CLEAR FORM
 ============================ */
-
-clearBtn.addEventListener("click",()=>{
-
-judul.value="";
-
-hook.value="";
-
-tema.value="";
-
-warna.value="";
-
-detail.value="";
-
-style.selectedIndex=0;
-
-lighting.selectedIndex=0;
-
-output.value="";
-
+clearBtn.addEventListener("click", () => {
+    judul.value = "";
+    hook.value = "";
+    tema.value = "";
+    warna.value = "";
+    detail.value = "";
+    style.selectedIndex = 0;
+    lighting.selectedIndex = 0;
+    output.value = "";
 });
 
 /* ============================
    SHORTCUT
 ============================ */
-
-document.addEventListener("keydown",(e)=>{
-
-if(e.ctrlKey && e.key==="Enter"){
-
-generateBtn.click();
-
-}
-
+document.addEventListener("keydown", (e) => {
+    if (e.ctrlKey && e.key === "Enter") {
+        generateBtn.click();
+    }
 });
 
 /* ============================
    AUTO SAVE
 ============================ */
+const fields = [judul, hook, tema, warna, style, lighting, detail, platform];
 
-const fields=[
-judul,
-hook,
-tema,
-warna,
-style,
-lighting,
-detail
-];
-
-fields.forEach(item=>{
-
-item.addEventListener("input",()=>{
-
-const data={
-
-judul:judul.value,
-hook:hook.value,
-tema:tema.value,
-warna:warna.value,
-style:style.value,
-lighting:lighting.value,
-detail:detail.value
-
-};
-
-localStorage.setItem(
-"npaPromptData",
-JSON.stringify(data)
-);
-
-});
-
+fields.forEach(item => {
+    item.addEventListener("input", () => {
+        const data = {
+            judul: judul.value,
+            hook: hook.value,
+            tema: tema.value,
+            warna: warna.value,
+            style: style.value,
+            lighting: lighting.value,
+            detail: detail.value,
+            platform: platform.value
+        };
+        localStorage.setItem("npaPromptData", JSON.stringify(data));
+    });
 });
 
 /* ============================
    LOAD DATA
 ============================ */
+window.addEventListener("load", () => {
+    const saved = localStorage.getItem("npaPromptData");
+    if (!saved) return;
+    const data = JSON.parse(saved);
 
-window.addEventListener("load",()=>{
-
-const saved=localStorage.getItem("npaPromptData");
-
-if(!saved) return;
-
-const data=JSON.parse(saved);
-
-judul.value=data.judul || "";
-hook.value=data.hook || "";
-tema.value=data.tema || "";
-warna.value=data.warna || "";
-style.value=data.style || "Modern Cinematic";
-lighting.value=data.lighting || "Dramatic Lighting";
-detail.value=data.detail || "";
-
+    judul.value = data.judul || "";
+    hook.value = data.hook || "";
+    tema.value = data.tema || "";
+    warna.value = data.warna || "";
+    style.value = data.style || "Modern Cinematic";
+    lighting.value = data.lighting || "Dramatic Lighting";
+    detail.value = data.detail || "";
+    if(data.platform) platform.value = data.platform;
 });
 
 /* ============================
    VERSION
 ============================ */
+console.log("%cNPA Smart System AI v13.0", "color:#38bdf8;font-size:16px;font-weight:bold;");
 
-console.log(
-"%cNPA Smart System AI v13.0",
-"color:#38bdf8;font-size:16px;font-weight:bold;"
-);
 /*==================================================
  NPA SMART SYSTEM AI
- Masterpiece Builder v13.0
  script.js PART 2
 ==================================================*/
 
 /* =====================================
    TOAST NOTIFICATION
 ===================================== */
-
 function showToast(message = "Berhasil!") {
-
     toast.innerHTML = message;
-
     toast.classList.add("show");
-
     setTimeout(() => {
-
         toast.classList.remove("show");
-
     }, 2500);
-
 }
 
 /* =====================================
    COPY PROMPT
 ===================================== */
-
 copyBtn.addEventListener("click", () => {
-
     if (output.value.trim() === "") {
-
         showToast("Generate Prompt terlebih dahulu!");
-
         return;
-
     }
-
     navigator.clipboard.writeText(output.value);
-
     showToast("Prompt berhasil disalin.");
-
 });
 
 /* =====================================
    DOWNLOAD TXT
 ===================================== */
-
 downloadBtn.addEventListener("click", () => {
-
     if (output.value.trim() === "") {
-
         showToast("Belum ada Prompt.");
-
         return;
-
     }
-
-    let fileName =
-        judul.value.trim() || "NPA_Prompt";
-
+    let fileName = judul.value.trim() || "NPA_Prompt";
     fileName = fileName.replace(/\s+/g, "_");
-
-    const blob = new Blob(
-        [output.value],
-        {
-            type: "text/plain"
-        }
-    );
-
+    
+    const blob = new Blob([output.value], { type: "text/plain" });
     const link = document.createElement("a");
-
     link.href = URL.createObjectURL(blob);
-
     link.download = fileName + ".txt";
-
     link.click();
-
     URL.revokeObjectURL(link.href);
-
     showToast("TXT berhasil diunduh.");
-
 });
 
 /* =====================================
    DOWNLOAD JSON
 ===================================== */
-
 jsonBtn.addEventListener("click", () => {
-
     const data = {
-
         judul: judul.value,
-
         hook: hook.value,
-
         tema: tema.value,
-
         warna: warna.value,
-
         style: style.value,
-
         lighting: lighting.value,
-
         detail: detail.value,
-
         prompt: output.value
-
     };
-
-    let fileName =
-        judul.value.trim() || "NPA_JSON";
-
+    let fileName = judul.value.trim() || "NPA_JSON";
     fileName = fileName.replace(/\s+/g, "_");
-
-    const blob = new Blob(
-
-        [
-
-            JSON.stringify(
-                data,
-                null,
-                2
-            )
-
-        ],
-
-        {
-
-            type: "application/json"
-
-        }
-
-    );
-
+    
+    const blob = new Blob([JSON.stringify(data, null, 2)], { type: "application/json" });
     const link = document.createElement("a");
-
     link.href = URL.createObjectURL(blob);
-
     link.download = fileName + ".json";
-
     link.click();
-
     URL.revokeObjectURL(link.href);
-
     showToast("JSON berhasil diunduh.");
-
 });
 
 /* =====================================
    AUTO GENERATE
 ===================================== */
-
 fields.forEach(item => {
-
     item.addEventListener("change", () => {
-
         if (judul.value === "") return;
-
-        output.value = buildPrompt();
-
+        output.value = assemblePrompt(); // Update ke mesin baru
     });
-
 });
 
 /* =====================================
    CHARACTER COUNTER
 ===================================== */
-
 function updateCounter() {
-
     const total = output.value.length;
-
     console.log("Total Character :", total);
-
 }
-
 output.addEventListener("input", updateCounter);
 
 /* =====================================
    SELECT OUTPUT
 ===================================== */
-
 output.addEventListener("click", () => {
-
     output.select();
-
 });
 
 /* =====================================
    DOUBLE CLICK COPY
 ===================================== */
-
 output.addEventListener("dblclick", () => {
-
     navigator.clipboard.writeText(output.value);
-
     showToast("Prompt berhasil disalin.");
-
 });
 
 /* =====================================
    WINDOW TITLE
 ===================================== */
-
 window.addEventListener("load", () => {
-
-    document.title =
-        "NPA Smart System AI";
-
+    document.title = "NPA Smart System AI";
 });
 
 /* =====================================
    VERSION INFO
 ===================================== */
-
 const version = {
-
     app: "NPA Smart System AI",
-
     version: "13.0",
-
-    developer: "PakD Sugiarto Kurniawan"
-
+    developer: "PakD Sugiarto Kurniawan & Team"
 };
-
 console.table(version);
-
-/* =====================================
-   END PART 2
-===================================== */
 
 /*==================================================
  NPA SMART SYSTEM AI
- script.js PART 4 FINAL
- Template Engine
+ script.js PART 4 FINAL (Template Engine)
 ==================================================*/
 
 const categoryButtons = document.querySelectorAll(".catBtn");
@@ -474,165 +269,98 @@ let currentCategory = "3ireborn";
 /* ==========================
 LOAD TEMPLATE
 ========================== */
+function loadTemplateList(category) {
+    templateSelect.innerHTML = "";
+    const firstOption = document.createElement("option");
+    firstOption.value = "";
+    firstOption.textContent = "Pilih Template...";
+    templateSelect.appendChild(firstOption);
 
-function loadTemplateList(category){
+    if (typeof TEMPLATE_DB === 'undefined' || !TEMPLATE_DB[category]) {
+        console.warn("Kategori tidak ditemukan :", category);
+        return;
+    }
 
-templateSelect.innerHTML="";
-
-const firstOption=document.createElement("option");
-
-firstOption.value="";
-
-firstOption.textContent="Pilih Template...";
-
-templateSelect.appendChild(firstOption);
-
-/* jika kategori tidak ada */
-
-if(!TEMPLATE_DB[category]){
-
-console.warn("Kategori tidak ditemukan :",category);
-
-return;
-
-}
-
-/* isi dropdown */
-
-TEMPLATE_DB[category].forEach((item,index)=>{
-
-const option=document.createElement("option");
-
-option.value=index;
-
-option.textContent=(index+1)+". "+item.hook;
-
-templateSelect.appendChild(option);
-
-});
-
+    TEMPLATE_DB[category].forEach((item, index) => {
+        const option = document.createElement("option");
+        option.value = index;
+        option.textContent = (index + 1) + ". " + item.hook;
+        templateSelect.appendChild(option);
+    });
 }
 
 /* ==========================
 CATEGORY BUTTON
 ========================== */
+categoryButtons.forEach(btn => {
+    btn.addEventListener("click", () => {
+        categoryButtons.forEach(item => {
+            item.classList.remove("active");
+        });
+        btn.classList.add("active");
+        
+        const category = btn.dataset.category;
+        
+        if (category === "all") {
+            templateSelect.innerHTML = "";
+            const first = document.createElement("option");
+            first.value = "";
+            first.textContent = "Pilih Template...";
+            templateSelect.appendChild(first);
+            
+            if (typeof TEMPLATE_DB !== 'undefined') {
+                Object.keys(TEMPLATE_DB).forEach(key => {
+                    TEMPLATE_DB[key].forEach((item, index) => {
+                        const option = document.createElement("option");
+                        option.value = key + "-" + index;
+                        option.textContent = "[" + key.toUpperCase() + "] " + item.hook;
+                        templateSelect.appendChild(option);
+                    });
+                });
+            }
+            currentCategory = "all";
+            return;
+        }
 
-categoryButtons.forEach(btn=>{
-
-btn.addEventListener("click",()=>{
-
-categoryButtons.forEach(item=>{
-
-item.classList.remove("active");
-
-});
-
-btn.classList.add("active");
-
-const category=btn.dataset.category;
-
-/* tombol semua */
-
-if(category==="all"){
-
-templateSelect.innerHTML="";
-
-const first=document.createElement("option");
-
-first.value="";
-
-first.textContent="Pilih Template...";
-
-templateSelect.appendChild(first);
-
-Object.keys(TEMPLATE_DB).forEach(key=>{
-
-TEMPLATE_DB[key].forEach((item,index)=>{
-
-const option=document.createElement("option");
-
-option.value=key+"-"+index;
-
-option.textContent="["+key.toUpperCase()+"] "+item.hook;
-
-templateSelect.appendChild(option);
-
-});
-
-});
-
-currentCategory="all";
-
-return;
-
-}
-
-currentCategory=category;
-
-loadTemplateList(category);
-
-});
-
+        currentCategory = category;
+        loadTemplateList(category);
+    });
 });
 
 /* ==========================
 SELECT TEMPLATE
 ========================== */
+templateSelect.addEventListener("change", () => {
+    if (templateSelect.value === "") return;
+    
+    let item;
+    if (currentCategory === "all") {
+        const data = templateSelect.value.split("-");
+        const cat = data[0];
+        const idx = parseInt(data[1]);
+        item = TEMPLATE_DB[cat][idx];
+    } else {
+        item = TEMPLATE_DB[currentCategory][parseInt(templateSelect.value)];
+    }
+    
+    if (!item) return;
 
-templateSelect.addEventListener("change",()=>{
+    judul.value = item.title || "";
+    hook.value = item.hook || "";
+    tema.value = item.theme || "";
+    warna.value = item.color || "";
+    style.value = item.style || "";
+    lighting.value = item.lighting || "";
+    detail.value = item.detail || "";
 
-if(templateSelect.value==="") return;
-
-let item;
-
-/* kategori semua */
-
-if(currentCategory==="all"){
-
-const data=templateSelect.value.split("-");
-
-const cat=data[0];
-
-const idx=parseInt(data[1]);
-
-item=TEMPLATE_DB[cat][idx];
-
-}else{
-
-item=TEMPLATE_DB[currentCategory][parseInt(templateSelect.value)];
-
-}
-
-if(!item) return;
-
-judul.value=item.title;
-
-hook.value=item.hook;
-
-tema.value=item.theme;
-
-warna.value=item.color;
-
-style.value=item.style;
-
-lighting.value=item.lighting;
-
-detail.value=item.detail;
-
-/* otomatis generate */
-
-output.value=buildPrompt();
-
+    /* otomatis generate menggunakan mesin baru */
+    output.value = assemblePrompt();
 });
 
 /* ==========================
 DEFAULT
 ========================== */
-
-window.addEventListener("DOMContentLoaded",()=>{
-
-loadTemplateList("3ireborn");
-
-console.log("✅ Template Engine Ready");
-
+window.addEventListener("DOMContentLoaded", () => {
+    loadTemplateList("3ireborn");
+    console.log("✅ Template Engine Ready");
 });
