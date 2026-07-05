@@ -1,7 +1,7 @@
 /*==================================================
  NPA SMART SYSTEM AI
  Masterpiece Builder v13.1
- script.js (With Video Engine)
+ script.js (With Video Engine & Photo Preview)
 ==================================================*/
 
 const judul = document.getElementById("judul");
@@ -15,7 +15,7 @@ const output = document.getElementById("output");
 const platform = document.getElementById("platform");
 
 const generateBtn = document.getElementById("generateBtn");
-const generateVideoBtn = document.getElementById("generateVideoBtn"); // TOMBOL BARU
+const generateVideoBtn = document.getElementById("generateVideoBtn"); 
 const randomBtn = document.getElementById("randomBtn");
 const copyBtn = document.getElementById("copyBtn");
 const downloadBtn = document.getElementById("downloadBtn");
@@ -24,6 +24,37 @@ const clearBtn = document.getElementById("clearBtn");
 
 const loadingBox = document.getElementById("loadingBox");
 const toast = document.getElementById("toast");
+
+/* ============================
+   PHOTO UPLOAD PREVIEW LOGIC
+============================ */
+const uploadArea = document.getElementById("uploadArea");
+const fileInput = document.getElementById("fileInput");
+const previewBox = document.getElementById("previewBox");
+const imagePreview = document.getElementById("imagePreview");
+const resetImgBtn = document.getElementById("resetImgBtn");
+
+if(uploadArea && fileInput) {
+    uploadArea.addEventListener("click", () => {
+        fileInput.click();
+    });
+
+    fileInput.addEventListener("change", function() {
+        if(this.files && this.files[0]) {
+            imagePreview.src = URL.createObjectURL(this.files[0]);
+            previewBox.style.display = "block";
+            uploadArea.style.display = "none";
+        }
+    });
+}
+
+if(resetImgBtn) {
+    resetImgBtn.addEventListener("click", () => {
+        fileInput.value = "";
+        previewBox.style.display = "none";
+        uploadArea.style.display = "block";
+    });
+}
 
 /* ============================
    ASSEMBLE PROMPT (IMAGE)
@@ -37,7 +68,7 @@ function assemblePrompt() {
     if (typeof PromptEngine !== 'undefined') {
         mainPrompt = PromptEngine.build(getFormData());
     } else {
-        mainPrompt = "Error: generator.js belum dimuat.";
+        mainPrompt = "🚨 ERROR: File generator.js belum dimuat. Mohon clear cache browser Anda.";
     }
     return platformPrefix + mainPrompt;
 }
@@ -51,10 +82,10 @@ function assembleVideoPrompt() {
         platformPrefix = PLATFORM_DB[platform.value].prefix + " (VIDEO FORMAT)\n";
     }
     let videoPrompt = "";
-    if (typeof PromptEngine !== 'undefined') {
+    if (typeof PromptEngine !== 'undefined' && typeof PromptEngine.buildVideo === 'function') {
         videoPrompt = PromptEngine.buildVideo(getFormData());
     } else {
-        videoPrompt = "Error: generator.js belum dimuat.";
+        videoPrompt = "🚨 ERROR VIDEO: Fungsi Video belum tersedia. Mohon clear cache browser Anda (Gunakan mode Samaran/Incognito).";
     }
     return platformPrefix + videoPrompt;
 }
@@ -94,12 +125,20 @@ generateVideoBtn.addEventListener("click", () => {
 clearBtn.addEventListener("click", () => {
     judul.value = ""; hook.value = ""; tema.value = ""; warna.value = ""; detail.value = "";
     style.selectedIndex = 0; lighting.selectedIndex = 0; output.value = "";
+    if(resetImgBtn) resetImgBtn.click(); // Reset foto juga
 });
 
 /* ============================
    AUTO SAVE & LOAD
 ============================ */
 const fields = [judul, hook, tema, warna, style, lighting, detail, platform];
+function getFormData(){
+    return {
+        title: judul.value, hook: hook.value, theme: tema.value, color: warna.value,
+        style: style.value, lighting: lighting.value, detail: detail.value
+    };
+}
+
 fields.forEach(item => {
     item.addEventListener("input", () => {
         const data = {
