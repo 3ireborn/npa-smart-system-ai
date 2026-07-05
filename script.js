@@ -1,7 +1,7 @@
 /*==================================================
  NPA SMART SYSTEM AI
- Masterpiece Builder v13.2
- script.js (Photo Preview, Dynamic Logic)
+ Masterpiece Builder v13.3
+ script.js (With VO Style Engine)
 ==================================================*/
 
 const judul = document.getElementById("judul");
@@ -13,6 +13,7 @@ const lighting = document.getElementById("lighting");
 const detail = document.getElementById("detail");
 const output = document.getElementById("output");
 const platform = document.getElementById("platform");
+const voStyle = document.getElementById("voStyle"); // Variabel baru untuk VO
 
 const generateBtn = document.getElementById("generateBtn");
 const generateVideoBtn = document.getElementById("generateVideoBtn"); 
@@ -97,15 +98,16 @@ generateVideoBtn.addEventListener("click", () => {
 
 clearBtn.addEventListener("click", () => {
     judul.value = ""; hook.value = ""; tema.value = ""; warna.value = ""; detail.value = "";
-    style.selectedIndex = 0; lighting.selectedIndex = 0; output.value = "";
+    style.selectedIndex = 0; lighting.selectedIndex = 0; voStyle.selectedIndex = 0; output.value = "";
     if(resetImgBtn) resetImgBtn.click();
 });
 
-const fields = [judul, hook, tema, warna, style, lighting, detail, platform];
+const fields = [judul, hook, tema, warna, style, lighting, detail, platform, voStyle];
 function getFormData(){
     return {
         title: judul.value, hook: hook.value, theme: tema.value, color: warna.value,
-        style: style.value, lighting: lighting.value, detail: detail.value
+        style: style.value, lighting: lighting.value, detail: detail.value,
+        voStyle: voStyle.value // Mengirim gaya bahasa ke generator
     };
 }
 
@@ -113,7 +115,8 @@ fields.forEach(item => {
     item.addEventListener("input", () => {
         const data = {
             judul: judul.value, hook: hook.value, tema: tema.value, warna: warna.value,
-            style: style.value, lighting: lighting.value, detail: detail.value, platform: platform.value
+            style: style.value, lighting: lighting.value, detail: detail.value, 
+            platform: platform.value, voStyle: voStyle.value
         };
         localStorage.setItem("npaPromptData", JSON.stringify(data));
     });
@@ -127,6 +130,7 @@ window.addEventListener("load", () => {
     warna.value = data.warna || ""; style.value = data.style || "Modern Cinematic";
     lighting.value = data.lighting || "Dramatic Lighting"; detail.value = data.detail || "";
     if(data.platform) platform.value = data.platform;
+    if(data.voStyle) voStyle.value = data.voStyle;
 });
 
 function showToast(message = "Berhasil!") {
@@ -171,7 +175,7 @@ jsonBtn.addEventListener("click", () => {
 
 const categoryButtons = document.querySelectorAll(".catBtn");
 const templateSelect = document.getElementById("templateSelect");
-let currentCategory = "all"; // Default ke Semua
+let currentCategory = "all"; 
 
 function loadTemplateList(category) {
     templateSelect.innerHTML = "";
@@ -231,11 +235,10 @@ templateSelect.addEventListener("change", () => {
     judul.value = item.title || ""; hook.value = item.hook || ""; tema.value = item.theme || "";
     warna.value = item.color || ""; style.value = item.style || ""; lighting.value = item.lighting || ""; detail.value = item.detail || "";
     
-    // Generate Otomatis Gambar
+    // Generate Otomatis Gambar (Default)
     output.value = assemblePrompt(); 
 });
 
 window.addEventListener("DOMContentLoaded", () => {
-    // Memuat default "Semua" saat pertama buka
     document.querySelector('.catBtn[data-category="all"]').click();
 });
