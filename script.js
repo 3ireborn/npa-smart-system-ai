@@ -16,6 +16,7 @@ const style = document.getElementById("style");
 const lighting = document.getElementById("lighting");
 const detail = document.getElementById("detail");
 const output = document.getElementById("output");
+const platform = document.getElementById("platform");
 
 const generateBtn = document.getElementById("generateBtn");
 const randomBtn = document.getElementById("randomBtn");
@@ -32,8 +33,13 @@ const toast = document.getElementById("toast");
 ============================ */
 
 function buildPrompt(){
+const selectedPlatform = PLATFORM_DB[platform.value];
 
+const platformPrefix = selectedPlatform
+    ? selectedPlatform.prefix
+    : "";
 const prompt = `
+${platformPrefix}
 
 THUMBNAIL CONTEXT
 
