@@ -1,29 +1,28 @@
 /*====================================================
  NPA SMART SYSTEM AI
- Masterpiece Builder v13.1
- generator.js (Image & 5-Scene Video Engine)
+ Masterpiece Builder v13.2
+ generator.js (Dynamic Aspect Ratio & 1-Block Video)
 ====================================================*/
 
 "use strict";
 
-const DEFAULT_ASPECT_RATIO = "9:16";
-
-const DEFAULT_REQUIREMENTS = [
-    "Ultra detailed",
-    "Professional composition",
-    "Sharp focus",
-    "High contrast",
-    "Clean layout",
-    "Cinematic atmosphere",
-    "Premium advertising quality"
-];
-
 function getVisualRequirements(){
-    return DEFAULT_REQUIREMENTS.map(item => "• " + item).join("\n");
+    return "• Ultra detailed\n• Professional composition\n• Sharp focus\n• High contrast\n• Clean layout\n• Cinematic atmosphere\n• Premium advertising quality";
 }
 
 function getFinalOutput(){
     return `Professional AI-generated artwork, cinematic composition, photorealistic, 8K, HDR, ultra realistic.`;
+}
+
+// LOGIKA DETEKSI ASPECT RATIO DARI DROPDOWN
+function getAspectRatio() {
+    const platformSelect = document.getElementById("platform");
+    if(platformSelect && platformSelect.selectedIndex >= 0) {
+        const text = platformSelect.options[platformSelect.selectedIndex].text;
+        const match = text.match(/\((.*?)\)/); // Ambil teks di dalam kurung e.g. (4:5)
+        return match ? match[1] : "9:16";
+    }
+    return "9:16";
 }
 
 function getCharacterContext(title) {
@@ -36,13 +35,13 @@ function getCharacterContext(title) {
         outfit = "wearing premium casual resort wear or subtle Balinese inspired elegant shirt";
     } else if (titleStr.includes("cruise")) {
         outfit = "wearing smart casual luxury cruise attire, premium polo shirt or casual navy blazer";
-    } else if (titleStr.includes("3ireborn")) {
+    } else if (titleStr.includes("3ireborn") || titleStr.includes("nganggur")) {
         outfit = "wearing premium executive suit, modern blazer and crisp shirt";
     }
 
     return `CHARACTER IDENTITY & CONSISTENCY
 • Face Reference Lock: Strict 90% likeness to the provided reference image.
-• Base Subject: Indonesian Muslim mentor, male around 50 years old but youthful, realistic Indonesian facial features, medium tan skin tone, neatly trimmed mustache and goatee beard, clear eyeglasses, black peci.
+• Base Subject: Indonesian Muslim mentor, male around 55 years old, realistic Indonesian facial features, medium tan skin tone, neatly trimmed mustache and goatee beard, clear eyeglasses, black peci.
 • Dynamic Outfit: ${outfit}.
 • Strict Rule: Facial structure, identity, eyeglasses, and peci MUST remain strictly unchanged. Only the body posture and clothing adapt to the thematic scene.`;
 }
@@ -51,11 +50,12 @@ function getCharacterContext(title) {
    BUILD PROMPT (IMAGE / BANNER)
 ========================================= */
 function buildPrompt(data){
+    const ar = getAspectRatio();
     return `THUMBNAIL / BANNER CONTEXT
 Video Title : ${data.title}
 Supporting Hook : ${data.hook}
 Theme : ${data.theme}
-Aspect Ratio : ${DEFAULT_ASPECT_RATIO}
+Aspect Ratio : ${ar}
 
 ${getCharacterContext(data.title)}
 
@@ -76,49 +76,20 @@ ${getFinalOutput()}`;
 }
 
 /* =========================================
-   BUILD PROMPT (5-SCENE VIDEO)
+   BUILD PROMPT (1-BLOCK CONTINUOUS VIDEO)
 ========================================= */
 function buildVideoPrompt(data){
     const charContext = getCharacterContext(data.title);
-    return `🎥 AI VIDEO PROMPT (Veo / Sora)
-Video Title : ${data.title}
-Aspect Ratio : ${DEFAULT_ASPECT_RATIO}
+    const ar = getAspectRatio();
+    
+    // Disatukan dalam 1 paragraf agar gampang di-copy paste mitra ke AI Video generator
+    return `🎥 AI VIDEO PROMPT (Continuous 40-Second Sequence)
+Aspect Ratio: ${ar}
 
 ${charContext}
 
-🎬 SCENE 1: HOOK (0:00 - 0:08)
-Visual: Cinematic medium shot. Subject looks directly into the camera with an engaging, enthusiastic expression.
-Action: Subject gestures dynamically towards the viewer. 
-Setting: ${data.lighting}, ${data.color}.
-AI Instructions: High motion, ultra-realistic, 8k, smooth gimbal movement.
-
-🎬 SCENE 2: MASALAH / PROBLEM (0:08 - 0:16)
-Visual: Medium close-up. Subject looks thoughtful, slightly concerned, or analyzing a situation.
-Action: Subject looking at a glowing digital chart or document, shaking head slightly in deep thought.
-Setting: Dimmer lighting, serious tone, ${data.color}.
-AI Instructions: Deep depth of field, dramatic shadows, emotional focus.
-
-🎬 SCENE 3: SOLUSI / SOLUTION (0:16 - 0:24)
-Visual: Wide shot transitioning to medium. Subject smiles confidently, expressing relief and authority.
-Action: Subject nods affirmatively and opens hands in a welcoming, solving gesture.
-Setting: Bright, optimistic ${data.lighting}, ${data.color}.
-AI Instructions: Cinematic push-in, bright atmosphere, premium advertising quality.
-
-🎬 SCENE 4: CTA / CALL TO ACTION (0:24 - 0:32)
-Visual: Close-up on the subject's face. Strong, persuasive eye contact.
-Action: Subject points clearly towards the bottom of the screen (directing to a link).
-Setting: ${data.style}, high contrast.
-AI Instructions: Sharp focus on subject, beautifully blurred background.
-
-🎬 SCENE 5: TAG / CLOSING (0:32 - 0:40)
-Visual: Wide epic shot. Subject standing proudly in the thematic environment.
-Action: Elegant slow-motion posture, inspiring presence.
-Setting: ${data.detail}.
-AI Instructions: Epic cinematic closing, fading beautifully, ultra-realistic 8k.
-
-📝 SCRIPT TEXT / OVERLAY IDEA:
-- Hook: "${data.hook}"
-- Theme: ${data.theme}`;
+🎬 CINEMATIC SCRIPT (Copy this entire block into AI Video Generator):
+A seamless cinematic 40-second sequence. SCENE 1 (Hook, 0:00-0:08): Cinematic medium shot, subject looks directly into the camera with engaging enthusiasm, gesturing dynamically to grab attention. Lighting is ${data.lighting} with ${data.color} grading. SCENE 2 (Problem, 0:08-0:16): Camera pushes in to a medium close-up, subject looks thoughtful and slightly concerned while analyzing a glowing digital element, deep depth of field. SCENE 3 (Solution, 0:16-0:24): Wide shot transitioning to medium, subject smiles confidently with a welcoming gesture, bright and optimistic atmosphere. SCENE 4 (CTA, 0:24-0:32): Extreme close-up on subject's face, strong persuasive eye contact, pointing down towards a CTA link, beautiful bokeh background. SCENE 5 (Tag, 0:32-0:40): Epic wide shot, subject standing proudly in a ${data.detail}, elegant slow-motion posture, fading beautifully. (Visual Text Overlay: "${data.hook}").`;
 }
 
 function getFormData(){
