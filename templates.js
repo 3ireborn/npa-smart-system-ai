@@ -451,7 +451,8 @@ color:"Emerald Green, Gold",
 style:"Professional Ads",
 lighting:"Neon Glow",
 detail:"Ultra realistic Kaaba, premium Islamic branding, elegant composition, high CTR, cinematic 8K."
-
+},
+ 
 ],
 
 
@@ -675,7 +676,8 @@ color:"Royal Blue, Gold, White",
 style:"Professional Ads",
 lighting:"Golden Hour",
 detail:"Ultra realistic luxury cruise ship, cinematic ocean sunset, premium travel advertising, elegant composition, high CTR, 8K photorealistic."
-
+},
+ 
 ],
  bali:[
 
@@ -897,7 +899,8 @@ color:"Orange Sunset, Blue Ocean, White",
 style:"Professional Ads",
 lighting:"Golden Hour",
 detail:"Ultra realistic Bali Gate, luxury resort, infinity pool, tropical beach, cinematic sunset, premium travel advertising, elegant composition, high CTR, 8K photorealistic."
-
+},
+ 
 ],
 
 
@@ -1121,7 +1124,8 @@ color:"Emerald Green, Gold, Black",
 style:"Professional Ads",
 lighting:"Neon Glow",
 detail:"Ultra realistic Kaaba, luxury Islamic office, happy Muslim family, cinematic lighting, premium advertising quality, elegant composition, high CTR, 8K photorealistic."
-
+}
+ 
 ]
 
 };
