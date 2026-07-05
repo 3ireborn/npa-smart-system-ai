@@ -15,18 +15,16 @@
 
 <div class="container">
 
-<!-- HEADER -->
 <header class="header">
 <div class="logoBox">
 <div class="logo">🤖</div>
 <div>
 <h1>NPA SMART SYSTEM</h1>
-<p>AI Banner Prompt Generator Pro</p>
+<p>AI Banner & Video Prompt Generator</p>
 </div>
 </div>
 </header>
 
-<!-- TEMPLATE CATEGORY -->
 <section class="card">
 <h2>Kategori Template</h2>
 <div class="categoryGrid">
@@ -39,7 +37,6 @@
 </div>
 </section>
 
-<!-- QUICK TEMPLATE -->
 <section class="card">
 <h2>Quick Template</h2>
 <select id="templateSelect">
@@ -47,11 +44,9 @@
 </select>
 </section>
 
-<!-- FORM & UPLOAD AREA -->
 <section class="card formCard">
 <div class="grid">
 
-<!-- KOTAK UPLOAD REFERENSI WAJAH -->
 <div class="inputGroup full" style="margin-bottom: 15px;">
   <label>Foto Referensi Wajah (Kunci Identitas 90%)</label>
   <div id="uploadArea" style="border: 2px dashed #8b5cf6; background: rgba(139, 92, 246, 0.1); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; color: #a78bfa; font-weight: 600;" onclick="document.getElementById('fileInput').click()">
@@ -73,7 +68,6 @@
     <img id="imagePreview" src="" style="max-height: 200px; border-radius: 8px; margin: 0 auto; display: block;" />
   </div>
 </div>
-<!-- END KOTAK UPLOAD -->
 
 <div class="inputGroup">
 <label>Platform Output</label>
@@ -90,7 +84,7 @@
 </div>
   
 <div class="inputGroup">
-<label>Judul Banner</label>
+<label>Judul Banner/Video</label>
 <input id="judul" type="text" placeholder="Contoh : ISTIKMAL SYARIAH">
 </div>
 
@@ -140,7 +134,8 @@
 
 <!-- BUTTON -->
 <div class="buttonGrid">
-<button id="generateBtn">✨ Generate Prompt</button>
+<button id="generateBtn" style="background: linear-gradient(135deg, #f43f5e, #f97316);">✨ Generate Image Prompt</button>
+<button id="generateVideoBtn" style="background: linear-gradient(135deg, #8b5cf6, #3b82f6);">🎬 Generate Video Prompt</button>
 <button id="randomBtn">🎲 Random Template</button>
 <button id="copyBtn">📋 Copy Prompt</button>
 <button id="downloadBtn">⬇ Download TXT</button>
@@ -178,34 +173,27 @@
 </div>
 </section>
 
-<!-- LOADING -->
 <div id="loadingBox" class="loadingBox">
 <div class="loader"></div>
 <h3>AI Sedang Membuat Prompt...</h3>
 <p>Mohon tunggu sebentar</p>
 </div>
 
-<!-- TOAST -->
 <div id="toast">Prompt berhasil disalin.</div>
 
-<!-- FLOATING BUTTON -->
 <button id="scrollTop">⬆</button>
 
-<!-- FOOTER -->
 <footer>
 <div class="footerLogo">🤖</div>
 <h2>NPA Smart System AI</h2>
-<p>Masterpiece Builder v13.0</p>
-<p>Professional Visual Prompt Generator</p>
+<p>Masterpiece Builder v13.1 (Video Edition)</p>
 <hr>
-<p>Powered by</p>
 <div class="powered">
 <span>ChatGPT</span>
 <span>Gemini</span>
 <span>Imagen</span>
 <span>Veo</span>
 <span>Sora</span>
-<span>Nano Banana</span>
 </div>
 <hr>
 <p style="font-weight: 600; color: #f472b6;">Salam penuh cinta 💞 dari NPA Smart System</p>
@@ -214,11 +202,11 @@
 
 </div>
 
-<!-- SCRIPT (CACHE BUSTER MODE v4) -->
-<script src="templates.js?v=4"></script>
-<script src="platform.js?v=4"></script>
-<script src="generator.js?v=4"></script>
-<script src="script.js?v=4"></script>
+<!-- SCRIPT BUSTER V5 -->
+<script src="templates.js?v=5"></script>
+<script src="platform.js?v=5"></script>
+<script src="generator.js?v=5"></script>
+<script src="script.js?v=5"></script>
 
 </body>
 </html>
