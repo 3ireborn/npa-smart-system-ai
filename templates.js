@@ -1,10 +1,32 @@
 /*==================================================
  NPA SMART SYSTEM AI
- Masterpiece Builder v13.0
- templates.js (Cleaned & Fixed Version)
+ Masterpiece Builder v13.2
+ templates.js (Cleaned & Added Nganggur Preneur)
 ==================================================*/
 
 const TEMPLATE_DB = {
+    "nganggur": [
+        { id: 1, title: "NGANGGUR PRENEUR", hook: "Jangan Takut Nganggur, Asal Produktif!", theme: "Digital Entrepreneur", color: "Orange, Blue, White", style: "Professional Ads", lighting: "Studio Lighting", detail: "Smiling confident mentor holding a smartphone, modern cafe workspace, productive atmosphere, cinematic composition." },
+        { id: 2, title: "NGANGGUR PRENEUR", hook: "Ubah Waktu Luang Jadi Uang", theme: "Passive Income", color: "Blue, Gold", style: "Modern Cinematic", lighting: "Neon Glow", detail: "Professional desk with laptop, glowing digital icons, futuristic business concept." },
+        { id: 3, title: "NGANGGUR PRENEUR", hook: "Sukses Jalur Nganggur Preneur", theme: "Success Mindset", color: "Green, White, Gold", style: "Minimalist", lighting: "Natural Sunlight", detail: "Clean modern office, successful leader looking optimistic, premium visual." },
+        { id: 4, title: "NGANGGUR PRENEUR", hook: "Rahasia Cuan Dari Rumah", theme: "Work From Home", color: "Warm Orange, Black", style: "Professional Ads", lighting: "Soft Lighting", detail: "Cozy home office, professional setup, relaxing yet productive vibe." },
+        { id: 5, title: "NGANGGUR PRENEUR", hook: "NPA Smart System Bikin Gampang", theme: "Smart System", color: "Blue Gradient", style: "Futuristic", lighting: "Dramatic Lighting", detail: "AI technology interface, professional mentor pointing at screen, ultra realistic." },
+        { id: 6, title: "NGANGGUR PRENEUR", hook: "Siap Jadi Jutawan Digital?", theme: "Digital Wealth", color: "Gold, Black", style: "Modern Cinematic", lighting: "Studio Lighting", detail: "Luxury business environment, financial freedom concept." },
+        { id: 7, title: "NGANGGUR PRENEUR", hook: "Mentor Bisnis Siap Bantu", theme: "Mentorship", color: "Blue, White", style: "Professional Ads", lighting: "Natural Sunlight", detail: "Friendly Indonesian mentor giving thumbs up, professional background." },
+        { id: 8, title: "NGANGGUR PRENEUR", hook: "Gaptek Tetap Bisa Sukses", theme: "Beginner Friendly", color: "Teal, White", style: "Minimalist", lighting: "Soft Lighting", detail: "Simple digital workspace, easy-to-use concept, approachable vibe." },
+        { id: 9, title: "NGANGGUR PRENEUR", hook: "Rebahan Tapi Penghasilan Jalan", theme: "Passive Income", color: "Purple, Pink, Blue", style: "Cyberpunk", lighting: "Neon Glow", detail: "Modern aesthetic bedroom setup with glowing laptop and charts." },
+        { id: 10, title: "NGANGGUR PRENEUR", hook: "Bangun Bisnis Tanpa Modal Besar", theme: "Smart Business", color: "Green, Gold", style: "Professional Ads", lighting: "Studio Lighting", detail: "Business growth chart, confident entrepreneur." },
+        { id: 11, title: "NGANGGUR PRENEUR", hook: "Dari Nganggur Jadi Direktur", theme: "Career Transformation", color: "Navy Blue, Silver", style: "Modern Cinematic", lighting: "Dramatic Lighting", detail: "Executive office, boss chair, cinematic lighting." },
+        { id: 12, title: "NGANGGUR PRENEUR", hook: "Skill Digital Penghasil Cuan", theme: "Digital Skills", color: "Orange, Dark Blue", style: "Professional Ads", lighting: "Studio Lighting", detail: "Creative workspace, glowing smartphone screen." },
+        { id: 13, title: "NGANGGUR PRENEUR", hook: "Cara Baru Cari Uang di Era AI", theme: "AI Business", color: "Cyan, Black", style: "Futuristic", lighting: "Neon Glow", detail: "Artificial intelligence hologram, futuristic mentor." },
+        { id: 14, title: "NGANGGUR PRENEUR", hook: "Waktunya Jadi Bos Untuk Diri Sendiri", theme: "Independent", color: "Red, Black, White", style: "Gaming Thumbnail", lighting: "Dramatic Lighting", detail: "Strong dynamic pose, high contrast, striking visual." },
+        { id: 15, title: "NGANGGUR PRENEUR", hook: "Jangan Cuma Nonton, Mulai Bikin Konten", theme: "Content Creator", color: "Pink, Purple", style: "Modern Cinematic", lighting: "Neon Glow", detail: "Professional podcast microphone, ring light, creator setup." },
+        { id: 16, title: "NGANGGUR PRENEUR", hook: "NP Akademi Solusi Masa Depan", theme: "Education", color: "Blue, White, Gold", style: "Professional Ads", lighting: "Natural Sunlight", detail: "Modern academy building background, smart professional." },
+        { id: 17, title: "NGANGGUR PRENEUR", hook: "Maksimalkan HP Untuk Bisnis", theme: "Mobile Business", color: "Green, Yellow", style: "Minimalist", lighting: "Soft Lighting", detail: "Close up holding a modern smartphone, glowing screen." },
+        { id: 18, title: "NGANGGUR PRENEUR", hook: "Sukses Itu Diciptakan, Bukan Ditunggu", theme: "Motivation", color: "Dark Blue, Gold", style: "Modern Cinematic", lighting: "Golden Hour", detail: "Inspiring sunset background, cinematic portrait." },
+        { id: 19, title: "NGANGGUR PRENEUR", hook: "Nganggur Tapi Punya Pasif Income", theme: "Financial Freedom", color: "Emerald, Gold", style: "Professional Ads", lighting: "Studio Lighting", detail: "Premium luxury lifestyle, coffee and laptop." },
+        { id: 20, title: "NGANGGUR PRENEUR", hook: "Bergabung Bersama Komunitas Sukses", theme: "Community", color: "Blue Gradient", style: "Professional Ads", lighting: "Natural Sunlight", detail: "Group of happy successful people, networking concept." }
+    ],
     "3ireborn": [
         { id: 1, title: "3IReborn", hook: "Bangun Income, Investment & Insurance", theme: "Financial Freedom", color: "Blue, Gold, White", style: "Professional Ads", lighting: "Studio Lighting", detail: "Modern office, successful entrepreneur, premium advertising, cinematic composition." },
         { id: 2, title: "3IReborn", hook: "Passive Income Dimulai Hari Ini", theme: "Passive Income", color: "Blue, Black, Gold", style: "Modern Cinematic", lighting: "Dramatic Lighting", detail: "Luxury office, glowing financial chart, professional businessman." },
