@@ -159,4 +159,4 @@ const TEMPLATE_DB = {
         { id: 19, title: "UMROH GRATIS", hook: "Baitullah Menanti Langkah Anda", theme: "Islamic Inspiration", color: "Emerald Green Gold", style: "Professional Ads", lighting: "Golden Hour", detail: "Sunrise over Kaaba, premium advertising." },
         { id: 20, title: "UMROH GRATIS", hook: "Umroh Gratis Bersama 3IReborn & Istikmal Syariah", theme: "Ultimate Reward", color: "Emerald Green, Gold, Black", style: "Professional Ads", lighting: "Neon Glow", detail: "Ultra realistic Kaaba, luxury Islamic office, happy Muslim family, cinematic lighting, premium advertising quality, elegant composition, high CTR, 8K photorealistic." }
     ]
-};
+}; 
