@@ -1,7 +1,7 @@
 /*====================================================
  NPA SMART SYSTEM AI
- Masterpiece Builder v13.4
- generator.js (3-Stage Video Workflow Engine)
+ Masterpiece Builder v13.6
+ generator.js (Universal Public Edition)
 ====================================================*/
 
 "use strict";
@@ -24,22 +24,21 @@ function getAspectRatio() {
     return "9:16";
 }
 
-// FUNGSI PENGATUR BAJU OTOMATIS
 function getOutfit(title) {
     const titleStr = title.toLowerCase();
     if (titleStr.includes("umroh") || titleStr.includes("istikmal")) return "elegant clean white koko shirt or professional Islamic attire";
     if (titleStr.includes("bali")) return "premium casual resort wear (no formal suit)";
     if (titleStr.includes("cruise")) return "smart casual luxury cruise attire";
-    if (titleStr.includes("3ireborn") || titleStr.includes("nganggur")) return "premium executive suit, modern blazer";
+    if (titleStr.includes("3ireborn") || titleStr.includes("nganggur")) return "premium executive suit, modern blazer and crisp shirt";
     return "premium neat professional office attire";
 }
 
 function getCharacterContext(title) {
     return `CHARACTER IDENTITY & CONSISTENCY
-• Face Reference Lock: Strict 90% likeness to the provided reference image.
-• Base Subject: Indonesian Muslim mentor, male around 55 years old, realistic Indonesian facial features, medium tan skin tone, neatly trimmed mustache and goatee beard, clear eyeglasses, black peci.
-• Dynamic Outfit: ${getOutfit(title)}.
-• Strict Rule: Facial structure, identity, eyeglasses, and peci MUST remain strictly unchanged (do not regenerate or alter facial features). Only the body posture and clothing adapt to the thematic scene.`;
+• Reference Lock: Strict 90% likeness to the provided reference image.
+• Base Subject: The gender, age, body type, and facial features MUST perfectly match the person in the uploaded reference image.
+• Dynamic Outfit: wearing ${getOutfit(title)}.
+• Strict Rule: Facial structure, identity, and natural anatomy MUST remain strictly unchanged (do not alter gender or facial characteristics). Only the body posture and clothing adapt to the thematic scene.`;
 }
 
 // MESIN KECERDASAN VOICEOVER
@@ -105,44 +104,49 @@ ${getFinalOutput()}`;
 }
 
 /* =========================================
-   BUILD PROMPT (VIDEO - 3 STAGE WORKFLOW)
+   BUILD PROMPT (VIDEO - REVERTED FORMAT)
 ========================================= */
 function buildVideoPrompt(data){
+    const charContext = getCharacterContext(data.title);
     const ar = getAspectRatio();
-    const outfit = getOutfit(data.title);
     
-    return `🎥 ALUR KERJA AI VIDEO PROMPT (Lengkap)
-Video Title: ${data.title}
+    return `🎥 AI VIDEO PROMPT (Veo 3 / Sora)
 Aspect Ratio: ${ar}
+Video Title: ${data.title}
+Theme: ${data.theme}
+
+${charContext}
 
 =======================================
-📸 TAHAP 1: PROMPT GAMBAR DASAR (BASE IMAGE)
+🎬 SCENE 1: HOOK (Durasi: 0:00 - 0:08)
 =======================================
-(Gunakan prompt ini di AI Gambar dengan melampirkan foto wajah referensi Anda)
-
-Instruksi Wajib: Menggunakan referensi wajah yang diunggah dengan 90% mirip. Karakter adalah pria Indonesia usia 55-an, berkumis dan berjenggot rapi, memakai kacamata bening dan peci hitam. Wajah, kacamata, dan peci TIDAK BOLEH berubah (do not regenerate).
-Visual: Subject is ${outfit}, located in ${data.detail}. Lighting: ${data.lighting}. Color: ${data.color}. Ultra detailed, photorealistic 8K, cinematic composition.
+[VISUAL]: Cinematic medium shot, subject looks directly into the camera with engaging enthusiasm, gesturing dynamically to grab attention. Lighting: ${data.lighting}.
+[VOICEOVER / NARASI INDONESIA]: ${getVideoVoiceover(1, data)}
 
 =======================================
-🎬 TAHAP 2: PROMPT VIDEO GERAK (Skenario 40 Detik)
+🎬 SCENE 2: MASALAH (Durasi: 0:08 - 0:16)
 =======================================
-(Masukkan Gambar dari Tahap 1 ke AI Video, lalu copy-paste prompt gerakan ini)
-
-A seamless cinematic 40-second video sequence maintaining strict 90% facial likeness to the reference image.
-SCENE 1 (Hook, 0:00-0:08): Medium shot, subject looks directly into the camera enthusiastically, gesturing to grab attention.
-SCENE 2 (Problem, 0:08-0:16): Medium close-up, subject looks thoughtful, deep depth of field.
-SCENE 3 (Solution, 0:16-0:24): Wide to medium shot, subject smiles confidently with a welcoming hand gesture.
-SCENE 4 (CTA, 0:24-0:32): Extreme close-up on face, strong eye contact, pointing down to a link.
-SCENE 5 (Closing, 0:32-0:40): Epic wide shot, elegant slow-motion posture. (Text Overlay: "${data.hook}").
+[VISUAL]: Camera pushes in to a medium close-up. Subject looks thoughtful and slightly concerned while analyzing a glowing digital element or document. Deep depth of field, dramatic shadows.
+[VOICEOVER / NARASI INDONESIA]: ${getVideoVoiceover(2, data)}
 
 =======================================
-🎙️ TAHAP 3: NARASI / VOICEOVER (Siap Edit & Rekam)
+🎬 SCENE 3: SOLUSI (Durasi: 0:16 - 0:24)
 =======================================
-• SCENE 1: ${getVideoVoiceover(1, data)}
-• SCENE 2: ${getVideoVoiceover(2, data)}
-• SCENE 3: ${getVideoVoiceover(3, data)}
-• SCENE 4: ${getVideoVoiceover(4, data)}
-• SCENE 5: ${getVideoVoiceover(5, data)}`;
+[VISUAL]: Wide shot transitioning to medium. Subject smiles confidently with a welcoming gesture, solving the problem. Bright and optimistic atmosphere, ${data.color} tones.
+[VOICEOVER / NARASI INDONESIA]: ${getVideoVoiceover(3, data)}
+
+=======================================
+🎬 SCENE 4: CALL TO ACTION (Durasi: 0:24 - 0:32)
+=======================================
+[VISUAL]: Extreme close-up on subject's face, strong persuasive eye contact, pointing down towards the bottom of the screen (directing to a link). Beautiful bokeh background.
+[VOICEOVER / NARASI INDONESIA]: ${getVideoVoiceover(4, data)}
+
+=======================================
+🎬 SCENE 5: CLOSING & TAG (Durasi: 0:32 - 0:40)
+=======================================
+[VISUAL]: Epic wide shot, subject standing proudly in ${data.detail}, elegant slow-motion posture, fading beautifully to black.
+[TEXT ON SCREEN]: "${data.hook}"
+[VOICEOVER / NARASI INDONESIA]: ${getVideoVoiceover(5, data)}`;
 }
 
 function getFormData(){
