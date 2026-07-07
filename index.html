@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NPA Smart Engine V3.i - Premium</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+    body {
+        font-family: 'Poppins', sans-serif;
+        background-color: #0b1120;
+        color: #ffffff;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        justify-content: center;
+    }
+    .container {
+        background: #1e293b;
+        border-radius: 15px;
+        padding: 30px;
+        max-width: 600px;
+        width: 100%;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
+    h1 {
+        text-align: center;
+        font-size: 1.8rem;
+        color: #fbbf24;
+        margin-bottom: 5px;
+    }
+    p.subtitle {
+        text-align: center;
+        color: #94a3b8;
+        font-size: 0.9rem;
+        margin-bottom: 25px;
+    }
+    .section-title {
+        background: #334155;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: 800;
+        margin-top: 25px;
+        color: #fbbf24;
+        letter-spacing: 1px;
+    }
+    label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        display: block;
+        margin-top: 15px;
+        color: #cbd5e1;
+    }
+    select, input {
+        width: 100%;
+        padding: 12px;
+        margin-top: 8px;
+        border-radius: 8px;
+        border: 1px solid #334155;
+        background: #0f172a;
+        color: white;
+        font-family: 'Poppins', sans-serif;
+        box-sizing: border-box;
+    }
+    .btn-group {
+        display: flex;
+        flex-direction: column;
+        gap: 15px;
+        margin-top: 25px;
+    }
+    button {
+        padding: 15px;
+        font-size: 1rem;
+        font-weight: 800;
+        border: none;
+        border-radius: 10px;
+        cursor: pointer;
+        transition: 0.3s;
+        text-transform: uppercase;
+    }
+    .btn-image {
+        background: linear-gradient(90deg, #f97316, #ea580c);
+        color: white;
+    }
+    .btn-video {
+        background: linear-gradient(90deg, #6366f1, #4f46e5);
+        color: white;
+    }
+    button:hover {
+        transform: translateY(-3px);
+        opacity: 0.9;
+    }
+    textarea {
+        width: 100%;
+        height: 300px;
+        margin-top: 20px;
+        padding: 15px;
+        border-radius: 8px;
+        background: #000;
+        color: #10b981;
+        border: 1px solid #334155;
+        font-family: monospace;
+        font-size: 13px;
+        resize: vertical;
+        box-sizing: border-box;
+    }
+</style>
+</head>
+<body>
+
+<div class="container">
+    <h1>🔥 NPA SMART ENGINE V3.i</h1>
+    <p class="subtitle">( Premium AI Video Prompt Generator )</p>
+
+    <div class="section-title">⚙️ IDENTITAS KARAKTER (AVATAR)</div>
+
+    <label>Jenis Kelamin</label>
+    <select id="gender">
+        <option value="male">Pria (Male)</option>
+        <option value="female">Wanita (Female)</option>
+    </select>
+
+    <label>Usia Karakter (Angka)</label>
+    <input type="number" id="age" value="35" placeholder="Contoh: 35">
+
+    <label>Pakaian / Attire (Ketik dlm B. Inggris)</label>
+    <input type="text" id="attire" value="elegant professional suit" placeholder="Contoh: elegant hijab / clean white koko shirt">
+
+    <div class="section-title">🎬 PENGATURAN VISUAL & AUDIO</div>
+
+    <label>Topik Konten</label>
+    <select id="topic">
+        <option value="ISTIKMAL SYARIAH">Istikmal Syariah (Islamic Motivation)</option>
+        <option value="3iREBORN BISNIS">3iReborn (Peluang Bisnis)</option>
+        <option value="NGANGGUR PRENEUR">Nganggur Preneur (Mentoring)</option>
+    </select>
+
+    <label>Background / Latar</label>
+    <select id="background">
+        <option value="Professional Podcast Studio">Studio Podcast Profesional</option>
+        <option value="Modern Executive Office">Kantor Eksekutif Modern</option>
+        <option value="Beautiful Mosque Architecture">Arsitektur Masjid Mewah</option>
+    </select>
+
+    <label>Lighting / Pencahayaan</label>
+    <select id="lighting">
+        <option value="Cinematic Studio Lighting">Cinematic Studio Lighting</option>
+        <option value="Natural Sunlight, warm tone">Natural Sunlight (Hangat)</option>
+        <option value="Dramatic Shadows, deep contrast">Dramatic Shadows</option>
+    </select>
+
+    <label>Gaya Bahasa (Voice Over)</label>
+    <select id="tone">
+        <option value="Profesional & Berwibawa">Profesional & Berwibawa</option>
+        <option value="Islami & Spiritual, menyentuh hati">Islami & Spiritual</option>
+        <option value="Motivasi Berapi-api, semangat tinggi">Motivasi Berapi-api</option>
+        <option value="Santai & Bersahabat, kasual">Santai & Bersahabat</option>
+    </select>
+
+    <label>Jumlah Scene</label>
+    <select id="scenes">
+        <option value="3">3 Scene (Pendek - Reels)</option>
+        <option value="5">5 Scene (Lengkap - Konversi)</option>
+    </select>
+
+    <div class="btn-group">
+        <button class="btn-image" onclick="generateImagePrompt()">✨ Generate Image Prompt (Blok 1)</button>
+        <button class="btn-video" onclick="generateVideoPrompt()">🎬 Generate Video Prompt (Blok 2)</button>
+    </div>
+
+    <label>Hasil Generator:</label>
+    <textarea id="resultOutput" placeholder="Mantra ajaib akan muncul di sini..."></textarea>
+</div>
+
+<script>
+    function getSelections() {
+        return {
+            gender: document.getElementById("gender").value,
+            age: document.getElementById("age").value,
+            attire: document.getElementById("attire").value,
+            topic: document.getElementById("topic").value,
+            bg: document.getElementById("background").value,
+            light: document.getElementById("lighting").value,
+            tone: document.getElementById("tone").value,
+            sceneCount: parseInt(document.getElementById("scenes").value)
+        };
+    }
+
+    function generateImagePrompt() {
+        const sel = getSelections();
+        const prompt = `📸 AI IMAGE PROMPT (Midjourney/Bing/ChatGPT)
+Aspect Ratio: 9:16 (Vertical)
+
+High definition portrait of a ${sel.age}-year-old confident Indonesian ${sel.gender}. 
+Attire: ${sel.attire}.
+Expression: Warm, confident, and professional smile looking directly at the camera.
+Background: ${sel.bg}.
+Lighting: ${sel.light}, beautiful bokeh, 8k resolution, photorealistic.
+RULE: NO TEXT, NO FONTS, NO WATERMARK, CLEAN IMAGE.`;
+        
+        document.getElementById("resultOutput").value = prompt;
+    }
+
+    function generateVideoPrompt() {
+        const sel = getSelections();
+        let prompt = `🎥 AI VIDEO PROMPT (Veo 3 / Luma)
+Aspect Ratio: 9:16
+Video Title: ${sel.topic}
+
+=======================================
+👤 AVATAR & CHARACTER LOCK (PENTING!)
+=======================================
+• Reference Lock: Strict 90% likeness to the provided reference image.
+• Character Description: ${sel.age}-year-old confident Indonesian ${sel.gender}.
+• Attire: Wearing ${sel.attire}.
+• Rule: Facial structure, gender, and identity MUST remain strictly unchanged. Only the body posture adapts.
+
+=======================================
+🎬 SCENE 1: HOOK (Durasi: 0:00 - 0:08)
+=======================================
+[VISUAL]: Cinematic medium shot, subject looks directly into the camera with engaging enthusiasm, gesturing dynamically to grab attention. Background: ${sel.bg}. Lighting: ${sel.light}.
+[VOICE TONE: ${sel.tone}]
+[VOICEOVER / NARASI]: "(Ketik kalimat pembuka penarik perhatian Anda di sini...)"
+
+=======================================
+🎬 SCENE 2: MASALAH
+=======================================
+[VISUAL]: Camera pushes in to a medium close-up. Subject looks thoughtful. Deep depth of field. Background: ${sel.bg}.
+[VOICE TONE: ${sel.tone}]
+[VOICEOVER / NARASI]: "(Ketik keluhan atau masalah prospek di sini...)"
+
+=======================================
+🎬 SCENE 3: SOLUSI
+=======================================
+[VISUAL]: Wide shot transitioning to medium. Subject smiles confidently with a welcoming gesture, offering a solution.
+[VOICE TONE: ${sel.tone}]
+[VOICEOVER / NARASI]: "(Jelaskan solusi dari program Anda di sini...)"`;
+
+        if(sel.sceneCount === 5) {
+            prompt += `
+
+=======================================
+🎬 SCENE 4: CALL TO ACTION
+=======================================
+[VISUAL]: Extreme close-up on subject's face, strong persuasive eye contact, pointing down towards the bottom of the screen.
+[VOICE TONE: ${sel.tone}]
+[VOICEOVER / NARASI]: "(Ajak mereka klik link atau hubungi Anda...)"
+
+=======================================
+🎬 SCENE 5: CLOSING
+=======================================
+[VISUAL]: Epic wide shot, subject standing proudly, elegant slow-motion posture, fading beautifully to black.
+[VOICE TONE: ${sel.tone}]
+[VOICEOVER / NARASI]: "(Slogan atau salam penutup Anda...)"`;
+        }
+
+        document.getElementById("resultOutput").value = prompt;
+    }
+</script>
+
+</body>
+</html>
