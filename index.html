@@ -3,261 +3,252 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NPA Smart Engine V3.i - Premium</title>
-<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;800&display=swap" rel="stylesheet">
+<title>NPA Smart System | Banner & Video Prompt Generator</title>
+<meta name="theme-color" content="#111827">
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 <style>
-    body {
-        font-family: 'Poppins', sans-serif;
-        background-color: #0b1120;
-        color: #ffffff;
-        margin: 0;
-        padding: 20px;
-        display: flex;
-        justify-content: center;
-    }
-    .container {
-        background: #1e293b;
-        border-radius: 15px;
-        padding: 30px;
-        max-width: 600px;
-        width: 100%;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-    }
-    h1 {
-        text-align: center;
-        font-size: 1.8rem;
-        color: #fbbf24;
-        margin-bottom: 5px;
-    }
-    p.subtitle {
-        text-align: center;
-        color: #94a3b8;
-        font-size: 0.9rem;
-        margin-bottom: 25px;
-    }
-    .section-title {
-        background: #334155;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: 800;
-        margin-top: 25px;
-        color: #fbbf24;
-        letter-spacing: 1px;
-    }
-    label {
-        font-weight: 600;
-        font-size: 0.9rem;
-        display: block;
-        margin-top: 15px;
-        color: #cbd5e1;
-    }
-    select, input {
-        width: 100%;
-        padding: 12px;
-        margin-top: 8px;
-        border-radius: 8px;
-        border: 1px solid #334155;
-        background: #0f172a;
-        color: white;
-        font-family: 'Poppins', sans-serif;
-        box-sizing: border-box;
-    }
-    .btn-group {
-        display: flex;
-        flex-direction: column;
-        gap: 15px;
-        margin-top: 25px;
-    }
-    button {
-        padding: 15px;
-        font-size: 1rem;
-        font-weight: 800;
-        border: none;
-        border-radius: 10px;
-        cursor: pointer;
-        transition: 0.3s;
-        text-transform: uppercase;
-    }
-    .btn-image {
-        background: linear-gradient(90deg, #f97316, #ea580c);
-        color: white;
-    }
-    .btn-video {
-        background: linear-gradient(90deg, #6366f1, #4f46e5);
-        color: white;
-    }
-    button:hover {
-        transform: translateY(-3px);
-        opacity: 0.9;
-    }
-    textarea {
-        width: 100%;
-        height: 300px;
-        margin-top: 20px;
-        padding: 15px;
-        border-radius: 8px;
-        background: #000;
-        color: #10b981;
-        border: 1px solid #334155;
-        font-family: monospace;
-        font-size: 13px;
-        resize: vertical;
-        box-sizing: border-box;
-    }
+  /* Tambahan Style untuk Section Identitas Avatar */
+  .avatar-section {
+    background: rgba(30, 41, 59, 0.8);
+    border: 1px solid #3b82f6;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+  .avatar-title {
+    color: #fbbf24;
+    font-weight: 700;
+    margin-bottom: 15px;
+    text-align: center;
+    border-bottom: 1px dashed #475569;
+    padding-bottom: 10px;
+  }
 </style>
 </head>
 <body>
 
+<div class="bg1"></div>
+<div class="bg2"></div>
+
 <div class="container">
-    <h1>🔥 NPA SMART ENGINE V3.i</h1>
-    <p class="subtitle">( Premium AI Video Prompt Generator )</p>
 
-    <div class="section-title">⚙️ IDENTITAS KARAKTER (AVATAR)</div>
+<header class="header">
+<div class="logoBox">
+<div class="logo">🤖</div>
+<div>
+<h1>NPA SMART SYSTEM</h1>
+<p>AI Banner & Video Prompt Generator V3.i</p>
+</div>
+</div>
+</header>
 
-    <label>Jenis Kelamin</label>
-    <select id="gender">
+<section class="card">
+<h2>Kategori Template</h2>
+<div class="categoryGrid">
+<button class="catBtn active" data-category="all">🌎 Semua</button>
+<button class="catBtn" data-category="tki">🇮🇩 Pejuang Devisa</button>
+<button class="catBtn" data-category="nganggur">🚀 Nganggur Preneur</button>
+<button class="catBtn" data-category="3ireborn">💼 3IReborn</button>
+<button class="catBtn" data-category="istikmal">🕌 Istikmal Syariah</button>
+<button class="catBtn" data-category="cruise">🚢 Reward Cruise</button>
+<button class="catBtn" data-category="bali">🌴 Reward Melali Bali</button>
+<button class="catBtn" data-category="umroh">🕋 Umroh Gratis</button>
+</div>
+</section>
+
+<section class="card">
+<h2>Quick Template</h2>
+<select id="templateSelect">
+<option value="">Pilih Template...</option>
+</select>
+</section>
+
+<section class="card formCard">
+
+<!-- INJEKSI FITUR BARU: IDENTITAS KARAKTER (AVATAR) -->
+<div class="avatar-section">
+  <div class="avatar-title">⚙️ IDENTITAS KARAKTER (AVATAR)</div>
+  <div class="grid" style="margin-bottom:0;">
+    <div class="inputGroup">
+      <label>Jenis Kelamin</label>
+      <select id="gender">
         <option value="male">Pria (Male)</option>
         <option value="female">Wanita (Female)</option>
-    </select>
-
-    <label>Usia Karakter (Angka)</label>
-    <input type="number" id="age" value="35" placeholder="Contoh: 35">
-
-    <label>Pakaian / Attire (Ketik dlm B. Inggris)</label>
-    <input type="text" id="attire" value="elegant professional suit" placeholder="Contoh: elegant hijab / clean white koko shirt">
-
-    <div class="section-title">🎬 PENGATURAN VISUAL & AUDIO</div>
-
-    <label>Topik Konten</label>
-    <select id="topic">
-        <option value="ISTIKMAL SYARIAH">Istikmal Syariah (Islamic Motivation)</option>
-        <option value="3iREBORN BISNIS">3iReborn (Peluang Bisnis)</option>
-        <option value="NGANGGUR PRENEUR">Nganggur Preneur (Mentoring)</option>
-    </select>
-
-    <label>Background / Latar</label>
-    <select id="background">
-        <option value="Professional Podcast Studio">Studio Podcast Profesional</option>
-        <option value="Modern Executive Office">Kantor Eksekutif Modern</option>
-        <option value="Beautiful Mosque Architecture">Arsitektur Masjid Mewah</option>
-    </select>
-
-    <label>Lighting / Pencahayaan</label>
-    <select id="lighting">
-        <option value="Cinematic Studio Lighting">Cinematic Studio Lighting</option>
-        <option value="Natural Sunlight, warm tone">Natural Sunlight (Hangat)</option>
-        <option value="Dramatic Shadows, deep contrast">Dramatic Shadows</option>
-    </select>
-
-    <label>Gaya Bahasa (Voice Over)</label>
-    <select id="tone">
-        <option value="Profesional & Berwibawa">Profesional & Berwibawa</option>
-        <option value="Islami & Spiritual, menyentuh hati">Islami & Spiritual</option>
-        <option value="Motivasi Berapi-api, semangat tinggi">Motivasi Berapi-api</option>
-        <option value="Santai & Bersahabat, kasual">Santai & Bersahabat</option>
-    </select>
-
-    <label>Jumlah Scene</label>
-    <select id="scenes">
-        <option value="3">3 Scene (Pendek - Reels)</option>
-        <option value="5">5 Scene (Lengkap - Konversi)</option>
-    </select>
-
-    <div class="btn-group">
-        <button class="btn-image" onclick="generateImagePrompt()">✨ Generate Image Prompt (Blok 1)</button>
-        <button class="btn-video" onclick="generateVideoPrompt()">🎬 Generate Video Prompt (Blok 2)</button>
+      </select>
     </div>
+    <div class="inputGroup">
+      <label>Usia Karakter (Angka)</label>
+      <input type="number" id="age" value="35" placeholder="Contoh: 35">
+    </div>
+    <div class="inputGroup full" style="margin-top:10px;">
+      <label>Pakaian / Attire (Ketik dlm B. Inggris)</label>
+      <input type="text" id="attire" value="elegant professional suit" placeholder="Contoh: elegant hijab / clean white koko shirt">
+    </div>
+  </div>
+</div>
+<!-- AKHIR INJEKSI FITUR BARU -->
 
-    <label>Hasil Generator:</label>
-    <textarea id="resultOutput" placeholder="Mantra ajaib akan muncul di sini..."></textarea>
+<div class="grid">
+
+<div class="inputGroup full" style="margin-bottom: 15px;">
+  <label>Foto Referensi Wajah (Kunci Identitas 90%)</label>
+  <div id="uploadArea" style="border: 2px dashed #8b5cf6; background: rgba(139, 92, 246, 0.1); border-radius: 12px; padding: 20px; text-align: center; cursor: pointer; color: #a78bfa; font-weight: 600;">
+    <span>📸 Klik untuk Upload Foto Referensi</span>
+    <input type="file" id="fileInput" accept="image/*" style="display: none;" />
+  </div>
+  <div id="previewBox" style="display: none; background: #1e293b; border: 1px solid #334155; border-radius: 12px; padding: 10px; position: relative; text-align: center; margin-top: 10px;">
+    <button id="resetImgBtn" style="position: absolute; top: -10px; right: -10px; background: #ef4444; color: white; border: none; border-radius: 50%; width: 28px; height: 28px; cursor: pointer; display: flex; align-items: center; justify-content: center; font-weight: bold; box-shadow: 0 4px 6px rgba(239, 68, 68, 0.3);">✕</button>
+    <img id="imagePreview" src="" style="max-height: 200px; border-radius: 8px; margin: 0 auto; display: block; object-fit: contain;" />
+    <p style="margin: 8px 0 0 0; font-size: 12px; color: #10b981; font-weight: 600;">✅ Foto Referensi Terpasang</p>
+  </div>
 </div>
 
-<script>
-    function getSelections() {
-        return {
-            gender: document.getElementById("gender").value,
-            age: document.getElementById("age").value,
-            attire: document.getElementById("attire").value,
-            topic: document.getElementById("topic").value,
-            bg: document.getElementById("background").value,
-            light: document.getElementById("lighting").value,
-            tone: document.getElementById("tone").value,
-            sceneCount: parseInt(document.getElementById("scenes").value)
-        };
-    }
+<div class="inputGroup">
+<label>Platform Output</label>
+<select id="platform">
+<option value="facebookFeed">📘 Facebook Feed (4:5)</option>
+<option value="facebookReel">🎬 Facebook Reel (9:16)</option>
+<option value="youtube">▶ YouTube Thumbnail (16:9)</option>
+<option value="instagramFeed">📸 Instagram Feed (1:1)</option>
+<option value="instagramStory">📱 Instagram Story (9:16)</option>
+<option value="website">🌐 Website Banner (4:3)</option>
+<option value="whatsapp">💬 WhatsApp Poster (4:5)</option>
+<option value="tiktok">🎵 TikTok Cover (9:16)</option>
+</select>
+</div>
+  
+<div class="inputGroup">
+<label>Judul Banner/Video</label>
+<input id="judul" type="text" placeholder="Contoh : ISTIKMAL SYARIAH">
+</div>
 
-    function generateImagePrompt() {
-        const sel = getSelections();
-        const prompt = `📸 AI IMAGE PROMPT (Midjourney/Bing/ChatGPT)
-Aspect Ratio: 9:16 (Vertical)
+<div class="inputGroup">
+<label>Sub Judul / Hook</label>
+<input id="hook" type="text" placeholder="Contoh : Bisnis Berkah Mengantarkan Sampai Mekah">
+</div>
 
-High definition portrait of a ${sel.age}-year-old confident Indonesian ${sel.gender}. 
-Attire: ${sel.attire}.
-Expression: Warm, confident, and professional smile looking directly at the camera.
-Background: ${sel.bg}.
-Lighting: ${sel.light}, beautiful bokeh, 8k resolution, photorealistic.
-RULE: NO TEXT, NO FONTS, NO WATERMARK, CLEAN IMAGE.`;
-        
-        document.getElementById("resultOutput").value = prompt;
-    }
+<div class="inputGroup">
+<label>Tema</label>
+<input id="tema" type="text" placeholder="Contoh : Islamic Business">
+</div>
 
-    function generateVideoPrompt() {
-        const sel = getSelections();
-        let prompt = `🎥 AI VIDEO PROMPT (Veo 3 / Luma)
-Aspect Ratio: 9:16
-Video Title: ${sel.topic}
+<div class="inputGroup">
+<label>Warna Dominan</label>
+<input id="warna" type="text" placeholder="Hijau Emerald, Gold, Hitam">
+</div>
 
-=======================================
-👤 AVATAR & CHARACTER LOCK (PENTING!)
-=======================================
-• Reference Lock: Strict 90% likeness to the provided reference image.
-• Character Description: ${sel.age}-year-old confident Indonesian ${sel.gender}.
-• Attire: Wearing ${sel.attire}.
-• Rule: Facial structure, gender, and identity MUST remain strictly unchanged. Only the body posture adapts.
+<div class="inputGroup">
+<label>Style Visual</label>
+<select id="style">
+<option>Modern Cinematic</option>
+<option>Gaming Thumbnail</option>
+<option>Cyberpunk</option>
+<option>Futuristic</option>
+<option>Minimalist</option>
+<option>Professional Ads</option>
+</select>
+</div>
 
-=======================================
-🎬 SCENE 1: HOOK (Durasi: 0:00 - 0:08)
-=======================================
-[VISUAL]: Cinematic medium shot, subject looks directly into the camera with engaging enthusiasm, gesturing dynamically to grab attention. Background: ${sel.bg}. Lighting: ${sel.light}.
-[VOICE TONE: ${sel.tone}]
-[VOICEOVER / NARASI]: "(Ketik kalimat pembuka penarik perhatian Anda di sini...)"
+<div class="inputGroup">
+<label>Lighting</label>
+<select id="lighting">
+<option>Dramatic Lighting</option>
+<option>Neon Glow</option>
+<option>Studio Lighting</option>
+<option>Soft Lighting</option>
+<option>Natural Sunlight</option>
+</select>
+</div>
 
-=======================================
-🎬 SCENE 2: MASALAH
-=======================================
-[VISUAL]: Camera pushes in to a medium close-up. Subject looks thoughtful. Deep depth of field. Background: ${sel.bg}.
-[VOICE TONE: ${sel.tone}]
-[VOICEOVER / NARASI]: "(Ketik keluhan atau masalah prospek di sini...)"
+<div class="inputGroup">
+<label>Gaya Bahasa (VO)</label>
+<select id="voStyle">
+<option value="profesional">Profesional & Berwibawa</option>
+<option value="santai">Santai & Bersahabat</option>
+<option value="islami">Islami & Spiritual</option>
+<option value="motivasi">Motivasi Berapi-api</option>
+</select>
+</div>
 
-=======================================
-🎬 SCENE 3: SOLUSI
-=======================================
-[VISUAL]: Wide shot transitioning to medium. Subject smiles confidently with a welcoming gesture, offering a solution.
-[VOICE TONE: ${sel.tone}]
-[VOICEOVER / NARASI]: "(Jelaskan solusi dari program Anda di sini...)"`;
+<div class="inputGroup full">
+<label>Detail Tambahan</label>
+<textarea id="detail" rows="6" placeholder="Tambahkan detail tambahan di sini..."></textarea>
+</div>
+</div>
 
-        if(sel.sceneCount === 5) {
-            prompt += `
+<div class="buttonGrid">
+<button id="generateBtn" style="background: linear-gradient(135deg, #f43f5e, #f97316);">✨ Generate Image Prompt</button>
+<button id="generateVideoBtn" style="background: linear-gradient(135deg, #8b5cf6, #3b82f6);">🎬 Generate Video Prompt</button>
+<button id="randomBtn">🎲 Random Template</button>
+<button id="copyBtn">📋 Copy Prompt</button>
+<button id="downloadBtn">⬇ Download TXT</button>
+<button id="jsonBtn">💾 Download JSON</button>
+<button id="clearBtn">🗑 Clear</button>
+</div>
+</section>
 
-=======================================
-🎬 SCENE 4: CALL TO ACTION
-=======================================
-[VISUAL]: Extreme close-up on subject's face, strong persuasive eye contact, pointing down towards the bottom of the screen.
-[VOICE TONE: ${sel.tone}]
-[VOICEOVER / NARASI]: "(Ajak mereka klik link atau hubungi Anda...)"
+<section class="card">
+<div class="titleRow">
+<h2>Generated Prompt</h2>
+<span>AI Ready</span>
+</div>
+<textarea id="output" readonly placeholder="Hasil prompt akan muncul di sini..."></textarea>
+</section>
 
-=======================================
-🎬 SCENE 5: CLOSING
-=======================================
-[VISUAL]: Epic wide shot, subject standing proudly, elegant slow-motion posture, fading beautifully to black.
-[VOICE TONE: ${sel.tone}]
-[VOICEOVER / NARASI]: "(Slogan atau salam penutup Anda...)"`;
-        }
+<section class="card statusCard">
+<div class="statusItem">
+<div class="statusNumber" id="templateCount">140</div>
+<div class="statusLabel">Total Template</div>
+</div>
+<div class="statusItem">
+<div class="statusNumber">6</div>
+<div class="statusLabel">Style Visual</div>
+</div>
+<div class="statusItem">
+<div class="statusNumber">5</div>
+<div class="statusLabel">Lighting</div>
+</div>
+<div class="statusItem">
+<div class="statusNumber">∞</div>
+<div class="statusLabel">Variasi Prompt</div>
+</div>
+</section>
 
-        document.getElementById("resultOutput").value = prompt;
-    }
-</script>
+<div id="loadingBox" class="loadingBox">
+<div class="loader"></div>
+<h3>AI Sedang Membuat Prompt...</h3>
+<p>Mohon tunggu sebentar</p>
+</div>
+
+<div id="toast">Prompt berhasil disalin.</div>
+
+<button id="scrollTop">⬆</button>
+
+<footer>
+<div class="footerLogo">🤖</div>
+<h2>NPA Smart System AI</h2>
+<p>Masterpiece Builder v13.6 (Global Edition)</p>
+<hr>
+<div class="powered">
+<span>ChatGPT</span>
+<span>Gemini</span>
+<span>Imagen</span>
+<span>Veo</span>
+<span>Sora</span>
+<span>Nano Banana</span>
+</div>
+<hr>
+<p style="font-weight: 600; color: #f472b6;">Salam penuh cinta 💞 dari NPA Smart System</p>
+<p>© 2026 PakD Sugiarto Kurniawan</p>
+</footer>
+
+</div>
+
+<script src="templates.js?v=11"></script>
+<script src="platform.js?v=11"></script>
+<script src="generator.js?v=11"></script>
+<script src="script.js?v=11"></script>
 
 </body>
 </html>
