@@ -80,12 +80,31 @@
     </div>
     <div class="inputGroup">
       <label>Usia Karakter (Angka)</label>
-      <input type="number" id="age" value="35" placeholder="Contoh: 35">
+      <input type="number" id="age" value="56" placeholder="Contoh: 56">
     </div>
+    
+    <!-- DROPDOWN PAKAIAN BARU -->
     <div class="inputGroup full" style="margin-top:10px;">
-      <label>Pakaian / Attire (Ketik dlm B. Inggris)</label>
-      <input type="text" id="attire" value="elegant professional suit" placeholder="Contoh: elegant hijab / clean white koko shirt">
+      <label>Pakaian / Attire (Pilih Otomatis)</label>
+      <select id="attireSelect" onchange="document.getElementById('customAttireBox').style.display = (this.value === 'custom') ? 'block' : 'none';">
+        <option value="elegant professional suit">👔 Jas Eksekutif (Pria/Wanita)</option>
+        <option value="traditional premium Indonesian Batik shirt">🥏 Kemeja Batik Premium (Pria/Wanita)</option>
+        <option value="clean white koko shirt">👳‍♂️ Baju Koko Putih (Pria)</option>
+        <option value="modern elegant hijab and blazer">🧕 Hijab Modern & Blazer (Wanita)</option>
+        <option value="smart casual polo shirt">👕 Smart Casual / Kaos Polo Bersih (Pria)</option>
+        <option value="professional business dress">👗 Gaun Kantor / Business Dress (Wanita)</option>
+        <option value="professional Islamic attire">🕌 Busana Muslim/Muslimah Elegan</option>
+        <option value="luxury resort wear">🌴 Baju Santai Mewah / Liburan Bali</option>
+        <option value="custom">✍️ Kustom (Ketik Sendiri...)</option>
+      </select>
+      
+      <!-- KOTAK KUSTOM (MUNCUL KALAU PILIH 'KUSTOM' DI ATAS) -->
+      <div id="customAttireBox" style="display: none; margin-top: 10px;">
+          <input type="text" id="customAttire" placeholder="Ketik dalam B. Inggris (Contoh: red jacket)">
+      </div>
     </div>
+    <!-- AKHIR DROPDOWN PAKAIAN -->
+
   </div>
 </div>
 <!-- AKHIR INJEKSI FITUR BARU -->
