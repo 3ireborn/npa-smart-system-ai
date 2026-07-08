@@ -13,8 +13,11 @@
     background: rgba(30, 41, 59, 0.8);
     border: 1px solid #3b82f6;
     border-radius: 12px;
-    padding: 20px;
+    padding: 15px; /* Padding dikurangi sedikit agar lega di HP */
     margin-bottom: 20px;
+    box-sizing: border-box !important;
+    width: 100% !important;
+    overflow: hidden !important; /* KUNCI MUTLAK: Potong apapun yang keluar jalur! */
   }
   .avatar-title {
     color: #fbbf24;
@@ -24,7 +27,13 @@
     border-bottom: 1px dashed #475569;
     padding-bottom: 10px;
   }
+  /* PAKSA SEMUA ISI DI DALAM AVATAR-SECTION PATUH PADA UKURAN */
+  .avatar-section * {
+    box-sizing: border-box !important;
+    max-width: 100% !important;
+  }
 </style>
+
 </head>
 <body>
 
