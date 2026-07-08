@@ -70,7 +70,6 @@ function getCharacterContext(title) {
 • Attire: Wearing ${outfit}.
 • Strict Rule: Facial structure, gender, identity, and natural anatomy MUST remain strictly unchanged. Only the body posture and clothing adapt to the thematic scene.`;
 }
-
 // MESIN KECERDASAN VOICEOVER
 function getVideoVoiceover(scene, data) {
     const style = data.voStyle || "profesional";
