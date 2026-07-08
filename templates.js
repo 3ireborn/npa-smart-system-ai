@@ -1,7 +1,7 @@
 /*==================================================
  NPA SMART SYSTEM AI
  Masterpiece Builder v13.6
- templates.js (Cleaned & Added 20 TKI Templates)
+ templates.js (Cleaned & Added 20 TKI Templates + EDUKASI)
 ==================================================*/
 
 const TEMPLATE_DB = {
@@ -158,5 +158,11 @@ const TEMPLATE_DB = {
         { id: 18, title: "UMROH GRATIS", hook: "Hadiah Terbaik Untuk Diri Sendiri", theme: "Personal Achievement", color: "Green White", style: "Modern Cinematic", lighting: "Soft Lighting", detail: "Luxury Islamic office, elegant atmosphere." },
         { id: 19, title: "UMROH GRATIS", hook: "Baitullah Menanti Langkah Anda", theme: "Islamic Inspiration", color: "Emerald Green Gold", style: "Professional Ads", lighting: "Golden Hour", detail: "Sunrise over Kaaba, premium advertising." },
         { id: 20, title: "UMROH GRATIS", hook: "Umroh Gratis Bersama 3IReborn & Istikmal Syariah", theme: "Ultimate Reward", color: "Emerald Green, Gold, Black", style: "Professional Ads", lighting: "Neon Glow", detail: "Ultra realistic Kaaba, luxury Islamic office, happy Muslim family, cinematic lighting, premium advertising quality, elegant composition, high CTR, 8K photorealistic." }
+    ],
+    "edukasi": [
+        { id: 1, title: "EDUKASI 3IREBORN", hook: "Kerja belasan tahun tapi tabungan masih segitu-gitu aja?", theme: "Financial Freedom & Investment", color: "Biru Profesional, Gold, Putih", style: "Modern Cinematic", lighting: "Studio Lighting", voStyle: "profesional", detail: "Visual seorang pekerja kantoran yang mulai tersenyum melihat grafik tabungannya naik berkat sistem 3i Reborn. Tampilkan ikon proteksi dan investasi." },
+        { id: 2, title: "SOLUSI INCOME TAMBAHAN", hook: "Gaji numpang lewat atau lagi pusing karena pengurangan karyawan?", theme: "Motivation & Business Opportunity", color: "Merah Menyala, Hitam, Kuning Emas", style: "Professional Ads", lighting: "Dramatic Lighting", voStyle: "motivasi", detail: "Visual seorang pria/wanita tersenyum percaya diri memegang smartphone, menunjukkan bisnis bisa dikerjakan dari rumah dengan fasilitas AI." },
+        { id: 3, title: "EMAK-EMAK JAGOAN", hook: "Siapa bilang gaptek nggak bisa sukses di era digital?", theme: "Women Empowerment & Passive Income", color: "Hijau Emerald, Pink Lembut, Putih", style: "Minimalist", lighting: "Soft Lighting", voStyle: "santai", detail: "Visual ibu rumah tangga berhijab yang modis dan bahagia, sedang memegang handphone dengan latar belakang suasana rumah yang rapi dan nyaman." },
+        { id: 4, title: "EDUKASI ISTIKMAL SYARIAH", hook: "Mencari rezeki bukan cuma soal jumlahnya, tapi berkahnya.", theme: "Islamic Business & Sharia Compliance", color: "Hijau Islami, Emas, Putih Bersih", style: "Modern Cinematic", lighting: "Natural Sunlight", voStyle: "islami", detail: "Visual elegan dengan sentuhan arsitektur Islami. Seseorang berpakaian koko/hijab tersenyum tenang memegang buku rencana keuangan." }
     ]
-};  
+};
