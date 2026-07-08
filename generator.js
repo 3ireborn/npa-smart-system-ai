@@ -1,7 +1,7 @@
 /*====================================================
  NPA SMART SYSTEM AI
  Masterpiece Builder v13.6
- generator.js (Universal Public Edition + Character Lock)
+ generator.js (Universal + Dropdown Attire)
 ====================================================*/
 
 "use strict";
@@ -25,15 +25,26 @@ function getAspectRatio() {
 }
 
 function getOutfit(title) {
-    // Cek apakah user mengisi kolom Pakaian kustom (dari HTML baru)
-    const customAttireElement = document.getElementById("attire");
+    // Tangkap data dari Dropdown baru
+    const attireSelect = document.getElementById("attireSelect");
+    const customAttire = document.getElementById("customAttire");
     
-    // Jika kotak kustom ada dan isinya tidak kosong, GUNAKAN ISIAN USER
-    if(customAttireElement && customAttireElement.value.trim() !== "") {
-        return customAttireElement.value.trim();
+    let finalAttire = "";
+
+    if (attireSelect) {
+        if (attireSelect.value === "custom" && customAttire && customAttire.value.trim() !== "") {
+            finalAttire = customAttire.value.trim(); // Pakai ketikan kustom
+        } else if (attireSelect.value !== "custom") {
+            finalAttire = attireSelect.value; // Pakai pilihan dropdown
+        }
+    }
+
+    // Jika berhasil mendapatkan pilihan, gunakan itu
+    if (finalAttire !== "") {
+        return finalAttire;
     }
     
-    // Jika kotak kustom kosong, pakai logika otomatis bawaan
+    // Jika entah kenapa gagal/kosong, pakai logika deteksi judul otomatis bawaan
     const titleStr = title.toLowerCase();
     if (titleStr.includes("umroh") || titleStr.includes("istikmal")) return "elegant clean white koko shirt or professional Islamic attire";
     if (titleStr.includes("bali")) return "premium casual resort wear (no formal suit)";
@@ -43,14 +54,13 @@ function getOutfit(title) {
 }
 
 function getCharacterContext(title) {
-    // Tangkap Usia dan Gender dari form HTML (jika tersedia)
+    // Tangkap Usia dan Gender
     const ageElement = document.getElementById("age");
     const genderElement = document.getElementById("gender");
     
-    // Default value jika terjadi error pembacaan form
     const age = ageElement ? ageElement.value : "35";
     const genderValue = genderElement ? genderElement.value : "male";
-    const genderText = genderValue === "female" ? "female" : "male"; // Konversi ke text inggris
+    const genderText = genderValue === "female" ? "female" : "male"; 
 
     const outfit = getOutfit(title);
 
@@ -94,7 +104,6 @@ function getVideoVoiceover(scene, data) {
         if (scene === 5) voText = `"${title}. Solusi cerdas untuk masa depan Anda."`;
     }
     
-    // INJEKSI VOICE TONE KE DALAM PROMPT VIDEO
     const toneMap = {
         "profesional": "Profesional & Berwibawa - confident, articulate",
         "santai": "Santai & Bersahabat - casual, friendly",
@@ -105,9 +114,6 @@ function getVideoVoiceover(scene, data) {
     return `[VOICE TONE: ${toneMap[style]}]\n[VOICEOVER / NARASI INDONESIA]: ${voText}`;
 }
 
-/* =========================================
-   BUILD PROMPT (IMAGE / BANNER)
-========================================= */
 function buildPrompt(data){
     const ar = getAspectRatio();
     return `THUMBNAIL / BANNER CONTEXT
@@ -134,9 +140,6 @@ FINAL OUTPUT
 ${getFinalOutput()}`;
 }
 
-/* =========================================
-   BUILD PROMPT (VIDEO - REVERTED FORMAT)
-========================================= */
 function buildVideoPrompt(data){
     const charContext = getCharacterContext(data.title);
     const ar = getAspectRatio();
