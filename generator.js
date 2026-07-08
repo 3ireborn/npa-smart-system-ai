@@ -1,7 +1,7 @@
 /*====================================================
  NPA SMART SYSTEM AI
  Masterpiece Builder v13.6
- generator.js (Universal + Dropdown Attire)
+ generator.js (Universal + Dropdown + CEO Mode)
 ====================================================*/
 
 "use strict";
@@ -39,12 +39,11 @@ function getOutfit(title) {
         }
     }
 
-    // Jika berhasil mendapatkan pilihan, gunakan itu
     if (finalAttire !== "") {
         return finalAttire;
     }
     
-    // Jika entah kenapa gagal/kosong, pakai logika deteksi judul otomatis bawaan
+    // Fallback logika otomatis
     const titleStr = title.toLowerCase();
     if (titleStr.includes("umroh") || titleStr.includes("istikmal")) return "elegant clean white koko shirt or professional Islamic attire";
     if (titleStr.includes("bali")) return "premium casual resort wear (no formal suit)";
@@ -54,9 +53,10 @@ function getOutfit(title) {
 }
 
 function getCharacterContext(title) {
-    // Tangkap Usia dan Gender
+    // Tangkap Usia, Gender, dan Checkbox Khusus
     const ageElement = document.getElementById("age");
     const genderElement = document.getElementById("gender");
+    const pendekarMode = document.getElementById("pendekarMode"); 
     
     const age = ageElement ? ageElement.value : "35";
     const genderValue = genderElement ? genderElement.value : "male";
@@ -64,12 +64,19 @@ function getCharacterContext(title) {
 
     const outfit = getOutfit(title);
 
+    // LOGIKA FITUR RAHASIA CEO
+    let physicalTrait = "";
+    if (pendekarMode && pendekarMode.checked) {
+        physicalTrait = "• CRITICAL PHYSICAL TRAIT (#DisabilitasPunyaKarya): The character is a left-arm amputee. DO NOT generate a left arm or left hand. The left sleeve should appear folded, empty, or naturally adjusted to reflect a left-arm amputee. This is mandatory for authentic identity representation.\n";
+    }
+
     return `CHARACTER IDENTITY & CONSISTENCY
 • Reference Lock: Strict 90% likeness to the provided reference image.
 • Character Description: A ${age}-year-old confident Indonesian ${genderText}.
 • Attire: Wearing ${outfit}.
-• Strict Rule: Facial structure, gender, identity, and natural anatomy MUST remain strictly unchanged. Only the body posture and clothing adapt to the thematic scene.`;
+${physicalTrait}• Strict Rule: Facial structure, gender, identity, and natural anatomy MUST remain strictly unchanged. Only the body posture and clothing adapt to the thematic scene.`;
 }
+
 // MESIN KECERDASAN VOICEOVER
 function getVideoVoiceover(scene, data) {
     const style = data.voStyle || "profesional";
