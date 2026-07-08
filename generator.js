@@ -150,44 +150,48 @@ function buildVideoPrompt(data){
     const charContext = getCharacterContext(data.title);
     const ar = getAspectRatio();
     
-    return `🎥 AI VIDEO PROMPT (Veo 3 / Sora)
+    return `=======================================
+⚙️ PROMPT KARAKTER (MASTER)
+👉 COPY bagian ini sekali saja, tempel di kolom utama AI Video.
+=======================================
 Aspect Ratio: ${ar}
 Video Title: ${data.title}
 Theme: ${data.theme}
 
 ${charContext}
 
+
 =======================================
-🎬 SCENE 1: HOOK (Durasi: 0:00 - 0:08)
+🎬 PROMPT SCENE (COPY SATU PER SATU)
+👉 Karakter di atas tidak perlu dihapus. Cukup masukkan Scene ini satu per satu untuk generate setiap 8 detik videonya.
 =======================================
+
+▶️ SCENE 1 (Durasi: 0:00 - 0:08)
 [VISUAL]: Cinematic medium shot, subject looks directly into the camera with engaging enthusiasm, gesturing dynamically to grab attention. Lighting: ${data.lighting}.
 ${getVideoVoiceover(1, data)}
 
-=======================================
-🎬 SCENE 2: MASALAH (Durasi: 0:08 - 0:16)
-=======================================
+---------------------------------------
+▶️ SCENE 2 (Durasi: 0:08 - 0:16)
 [VISUAL]: Camera pushes in to a medium close-up. Subject looks thoughtful and slightly concerned while analyzing a glowing digital element or document. Deep depth of field, dramatic shadows.
 ${getVideoVoiceover(2, data)}
 
-=======================================
-🎬 SCENE 3: SOLUSI (Durasi: 0:16 - 0:24)
-=======================================
+---------------------------------------
+▶️ SCENE 3 (Durasi: 0:16 - 0:24)
 [VISUAL]: Wide shot transitioning to medium. Subject smiles confidently with a welcoming gesture, solving the problem. Bright and optimistic atmosphere, ${data.color} tones.
 ${getVideoVoiceover(3, data)}
 
-=======================================
-🎬 SCENE 4: CALL TO ACTION (Durasi: 0:24 - 0:32)
-=======================================
+---------------------------------------
+▶️ SCENE 4 (Durasi: 0:24 - 0:32)
 [VISUAL]: Extreme close-up on subject's face, strong persuasive eye contact, pointing down towards the bottom of the screen (directing to a link). Beautiful bokeh background.
 ${getVideoVoiceover(4, data)}
 
-=======================================
-🎬 SCENE 5: CLOSING & TAG (Durasi: 0:32 - 0:40)
-=======================================
-[VISUAL]: Epic wide shot, subject standing proudly in ${data.detail}, elegant slow-motion posture, fading beautifully to black.
+---------------------------------------
+▶️ SCENE 5 : CLOSING (Durasi: 0:32 - 0:40)
+[VISUAL]: Epic wide shot, subject standing proudly in ${data.detail}. Elegant slow-motion posture, fading beautifully to black.
 [TEXT ON SCREEN]: "${data.hook}"
 ${getVideoVoiceover(5, data)}`;
 }
+
 
 function getFormData(){
     return {
